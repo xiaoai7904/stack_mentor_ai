@@ -1,0 +1,97 @@
+<svg width="1440" height="1080" viewBox="0 0 1440 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1440" height="1080" fill="#F4F7FB"/>
+  <rect x="32" y="28" width="1376" height="1024" rx="24" fill="#FFFFFF" stroke="#E4EAF3"/>
+
+  <rect x="32" y="28" width="1376" height="76" rx="24" fill="#111827"/>
+  <text x="64" y="77" fill="#FFFFFF" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="28" font-weight="700">Stack Mentor AI</text>
+  <text x="304" y="77" fill="#9CA3AF" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">AI 框架源码学习工作台</text>
+  <rect x="1178" y="48" width="106" height="36" rx="8" fill="#1F2937" stroke="#374151"/>
+  <text x="1207" y="71" fill="#E5E7EB" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14">知识库</text>
+  <rect x="1296" y="48" width="80" height="36" rx="8" fill="#3B82F6"/>
+  <text x="1322" y="71" fill="#FFFFFF" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14">登录</text>
+
+  <rect x="56" y="128" width="236" height="900" rx="18" fill="#F8FAFC" stroke="#E5EAF2"/>
+  <text x="80" y="172" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="18" font-weight="700">学习模块</text>
+  <rect x="80" y="204" width="188" height="44" rx="10" fill="#EAF2FF"/>
+  <rect x="92" y="218" width="16" height="16" rx="4" fill="#3B82F6"/>
+  <text x="122" y="232" fill="#1D4ED8" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700">API 解释器</text>
+  <text x="122" y="292" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">源码阅读助手</text>
+  <text x="122" y="352" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">调用链分析</text>
+  <text x="122" y="412" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">源码知识图谱</text>
+  <text x="122" y="472" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">AI 实验室</text>
+  <text x="122" y="532" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">AI 面试官</text>
+  <line x1="80" y1="580" x2="268" y2="580" stroke="#E2E8F0"/>
+  <text x="80" y="620" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700">当前知识源</text>
+  <rect x="80" y="642" width="188" height="34" rx="8" fill="#FFFFFF" stroke="#D9E2EF"/>
+  <text x="96" y="664" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">Vue 3 Docs</text>
+  <rect x="80" y="688" width="188" height="34" rx="8" fill="#FFFFFF" stroke="#D9E2EF"/>
+  <text x="96" y="710" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">Vue Core Source</text>
+  <rect x="80" y="734" width="188" height="34" rx="8" fill="#FFFFFF" stroke="#D9E2EF"/>
+  <text x="96" y="756" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">Vue RFC</text>
+
+  <text x="328" y="164" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="30" font-weight="700">API 解释器</text>
+  <text x="328" y="193" fill="#64748B" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="16">输入 API 或代码片段，获得用法、设计动机、源码入口和常见错误。</text>
+
+  <rect x="328" y="222" width="880" height="116" rx="16" fill="#F8FAFC" stroke="#DDE6F2"/>
+  <text x="352" y="256" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" font-weight="700">输入内容</text>
+  <rect x="352" y="274" width="700" height="42" rx="8" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="372" y="300" fill="#0F172A" font-family="Menlo, Consolas, monospace" font-size="16">watch()</text>
+  <rect x="1068" y="274" width="140" height="42" rx="8" fill="#2563EB"/>
+  <text x="1105" y="301" fill="#FFFFFF" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15" font-weight="700">开始解析</text>
+
+  <rect x="1224" y="222" width="328" height="116" rx="16" fill="#F8FAFC" stroke="#DDE6F2" transform="translate(-176,0)"/>
+  <text x="1080" y="256" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14" font-weight="700">用户水平</text>
+  <rect x="1080" y="276" width="70" height="30" rx="15" fill="#DBEAFE"/>
+  <text x="1098" y="296" fill="#1D4ED8" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">初级</text>
+  <rect x="1158" y="276" width="70" height="30" rx="15" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="1176" y="296" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">中级</text>
+  <rect x="1236" y="276" width="70" height="30" rx="15" fill="#FFFFFF" stroke="#CBD5E1"/>
+  <text x="1254" y="296" fill="#475569" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">高级</text>
+
+  <rect x="328" y="366" width="430" height="274" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="352" y="405" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700">基础解释</text>
+  <text x="352" y="440" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">作用：监听响应式数据变化并执行回调。</text>
+  <text x="352" y="470" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">参数：source、callback、options。</text>
+  <text x="352" y="500" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">返回：停止监听的 stop 函数。</text>
+  <rect x="352" y="526" width="382" height="88" rx="10" fill="#0F172A"/>
+  <text x="372" y="558" fill="#A7F3D0" font-family="Menlo, Consolas, monospace" font-size="14">const stop = watch(count, cb)</text>
+  <text x="372" y="586" fill="#A7F3D0" font-family="Menlo, Consolas, monospace" font-size="14">stop()</text>
+
+  <rect x="786" y="366" width="392" height="274" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="810" y="405" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700">设计动机</text>
+  <text x="810" y="440" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">watch 让副作用与响应式状态变化解耦。</text>
+  <text x="810" y="470" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">它通过 scheduler 控制回调触发时机。</text>
+  <text x="810" y="500" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="15">适合异步请求、外部同步和命令式副作用。</text>
+  <rect x="810" y="526" width="330" height="46" rx="8" fill="#FEF3C7"/>
+  <text x="826" y="555" fill="#92400E" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14">重点：区分依赖收集与副作用执行</text>
+
+  <rect x="1198" y="366" width="316" height="274" rx="16" fill="#FFFFFF" stroke="#E2E8F0" transform="translate(-176,0)"/>
+  <text x="1046" y="405" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700">证据来源</text>
+  <rect x="1046" y="430" width="260" height="40" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="1062" y="455" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">Vue Docs / watch</text>
+  <rect x="1046" y="486" width="260" height="40" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="1062" y="511" fill="#334155" font-family="Menlo, Consolas, monospace" font-size="12">runtime-core/apiWatch.ts</text>
+  <rect x="1046" y="542" width="260" height="40" rx="8" fill="#F8FAFC" stroke="#E2E8F0"/>
+  <text x="1062" y="567" fill="#334155" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="13">Vue Reactivity RFC</text>
+
+  <rect x="328" y="670" width="584" height="286" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="352" y="710" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700">源码调用链</text>
+  <line x1="384" y1="752" x2="384" y2="900" stroke="#93C5FD" stroke-width="3"/>
+  <circle cx="384" cy="752" r="10" fill="#2563EB"/>
+  <circle cx="384" cy="800" r="10" fill="#2563EB"/>
+  <circle cx="384" cy="848" r="10" fill="#2563EB"/>
+  <circle cx="384" cy="896" r="10" fill="#2563EB"/>
+  <text x="414" y="758" fill="#334155" font-family="Menlo, Consolas, monospace" font-size="14">watch()</text>
+  <text x="414" y="806" fill="#334155" font-family="Menlo, Consolas, monospace" font-size="14">doWatch()</text>
+  <text x="414" y="854" fill="#334155" font-family="Menlo, Consolas, monospace" font-size="14">ReactiveEffect</text>
+  <text x="414" y="902" fill="#334155" font-family="Menlo, Consolas, monospace" font-size="14">scheduler -> callback</text>
+
+  <rect x="940" y="670" width="366" height="286" rx="16" fill="#FFFFFF" stroke="#E2E8F0"/>
+  <text x="964" y="710" fill="#111827" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="20" font-weight="700">学习建议</text>
+  <rect x="964" y="742" width="282" height="42" rx="8" fill="#ECFDF5"/>
+  <text x="980" y="768" fill="#047857" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14">1. 先读 watch API 文档</text>
+  <rect x="964" y="800" width="282" height="42" rx="8" fill="#EFF6FF"/>
+  <text x="980" y="826" fill="#1D4ED8" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14">2. 再读 apiWatch.ts</text>
+  <rect x="964" y="858" width="282" height="42" rx="8" fill="#F5F3FF"/>
+  <text x="980" y="884" fill="#6D28D9" font-family="Arial, 'Microsoft YaHei', sans-serif" font-size="14">3. 最后理解 scheduler</text>
+</svg>
