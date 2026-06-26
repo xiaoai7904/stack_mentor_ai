@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up | Stack Mentor AI</title>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-container": "#006f66",
+                    "on-tertiary-fixed": "#351000",
+                    "secondary-fixed-dim": "#6bd8cb",
+                    "inverse-on-surface": "#f3effc",
+                    "primary": "#3525cd",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "surface-container-lowest": "#ffffff",
+                    "surface": "#fcf8ff",
+                    "primary-fixed": "#e2dfff",
+                    "surface-container": "#f0ecf9",
+                    "on-secondary-fixed-variant": "#005049",
+                    "on-secondary-fixed": "#00201d",
+                    "on-secondary": "#ffffff",
+                    "outline": "#777587",
+                    "on-error-container": "#93000a",
+                    "tertiary-fixed-dim": "#ffb695",
+                    "error": "#ba1a1a",
+                    "surface-dim": "#dcd8e5",
+                    "surface-bright": "#fcf8ff",
+                    "call-chain-blue": "#2563EB",
+                    "code-bg": "#1E1E1E",
+                    "border-subtle": "#E5E7EB",
+                    "secondary": "#006a61",
+                    "surface-variant": "#e4e1ee",
+                    "secondary-fixed": "#89f5e7",
+                    "background": "#fcf8ff",
+                    "on-tertiary": "#ffffff",
+                    "surface-container-low": "#f5f2ff",
+                    "outline-variant": "#c7c4d8",
+                    "secondary-container": "#86f2e4",
+                    "api-teal": "#0D9488",
+                    "tertiary-container": "#a44100",
+                    "primary-container": "#4f46e5",
+                    "surface-gray": "#F9FAFB",
+                    "inverse-surface": "#302f39",
+                    "surface-container-high": "#eae6f4",
+                    "on-surface": "#1b1b24",
+                    "source-purple": "#7C3AED",
+                    "surface-tint": "#4d44e3",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-surface-variant": "#464555",
+                    "error-container": "#ffdad6",
+                    "graph-indigo": "#4F46E5",
+                    "tertiary-fixed": "#ffdbcc",
+                    "inverse-primary": "#c3c0ff",
+                    "on-error": "#ffffff",
+                    "tertiary": "#7e3000",
+                    "on-tertiary-fixed-variant": "#7b2f00",
+                    "surface-container-highest": "#e4e1ee",
+                    "on-background": "#1b1b24",
+                    "on-tertiary-container": "#ffd2be",
+                    "on-primary-fixed": "#0f0069",
+                    "on-primary-container": "#dad7ff",
+                    "on-primary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "container-max": "1440px",
+                    "margin-mobile": "16px",
+                    "stack-lg": "24px",
+                    "sidebar-width": "260px",
+                    "gutter": "24px",
+                    "margin-desktop": "32px",
+                    "stack-sm": "8px",
+                    "stack-md": "16px"
+            },
+            "fontFamily": {
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "code-sm": ["JetBrains Mono"],
+                    "headline-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                    "code-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .strength-bar {
+            height: 4px;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-x-hidden min-h-screen">
+<main class="flex min-h-screen">
+<!-- Left Side: Visual Narrative (Desktop Only) -->
+<div class="hidden lg:flex lg:w-1/2 relative bg-primary-container items-center justify-center overflow-hidden">
+<!-- Animated Shader Background Placeholder -->
+
+<div class="relative z-10 px-margin-desktop text-center">
+<div class="mb-stack-lg inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-on-primary-container">
+<span class="material-symbols-outlined text-sm mr-2">verified</span>
+<span class="font-label-md text-label-md">Trusted by 50k+ Framework Experts</span>
+</div>
+<h1 class="font-display-lg text-display-lg text-white mb-stack-md leading-tight">Master the Stack with<br/>Artificial Intelligence</h1>
+<p class="font-body-lg text-body-lg text-on-primary-container opacity-80 max-w-md mx-auto">
+                    Join a community of developers architecting the future. Get personalized mentorship, code audits, and framework-specific insights.
+                </p>
+<!-- Mock Code Snippet for Dev-Centric Feel -->
+<div class="mt-stack-lg text-left bg-code-bg p-stack-md rounded-xl border border-outline/20 shadow-2xl max-w-sm mx-auto">
+<div class="flex gap-2 mb-3">
+<div class="w-3 h-3 rounded-full bg-[#FF5F56]"></div>
+<div class="w-3 h-3 rounded-full bg-[#FFBD2E]"></div>
+<div class="w-3 h-3 rounded-full bg-[#27C93F]"></div>
+</div>
+<pre class="font-code-sm text-code-sm text-surface-variant leading-relaxed"><code><span class="text-source-purple">const</span> <span class="text-api-teal">mentor</span> = <span class="text-source-purple">await</span> StackMentor.<span class="text-call-chain-blue">connect</span>({
+  user: <span class="text-secondary-fixed-dim">'New_Expert'</span>,
+  framework: <span class="text-secondary-fixed-dim">'Next.js'</span>,
+  goal: <span class="text-secondary-fixed-dim">'Architecture_Review'</span>
+});</code></pre>
+</div>
+</div>
+</div>
+<!-- Right Side: Sign Up Form -->
+<div class="w-full lg:w-1/2 flex items-center justify-center p-margin-mobile md:p-margin-desktop bg-surface">
+<div class="w-full max-w-[440px] space-y-stack-lg">
+<!-- Brand Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg shadow-lg">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Stack Mentor AI</span>
+</div>
+<a class="text-primary font-label-md text-label-md hover:underline decoration-2 underline-offset-4" href="#">Log In</a>
+</div>
+<div class="pt-stack-md">
+<h2 class="font-headline-md text-headline-md text-on-surface mb-stack-sm">Create Your Account</h2>
+<p class="font-body-md text-body-md text-on-surface-variant">Join the community of framework experts.</p>
+</div>
+<!-- Social Auth -->
+<div class="grid grid-cols-2 gap-gutter">
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-outline-variant hover:bg-surface-container-low transition-all duration-200 group active:scale-95">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M12.48 10.92v3.28h7.84c-.24 1.84-.909 3.164-1.908 4.156-1.24 1.24-3.16 2.56-6.4 2.56-5.08 0-9.08-4.12-9.08-9.2s4-9.2 9.08-9.2c2.72 0 4.84 1.08 6.4 2.52l2.32-2.32C18.68 1.12 15.84 0 12.48 0 5.8 0 0 5.4 0 12.2s5.8 12.2 12.48 12.2c3.56 0 6.4-1.16 8.52-3.32 2.2-2.2 2.88-5.32 2.88-7.88 0-.52-.04-1.04-.12-1.52H12.48z" fill="currentColor"></path>
+</svg>
+<span class="font-label-md text-label-md">Google</span>
+</button>
+<button class="flex items-center justify-center gap-2 py-3 px-4 rounded-xl border border-outline-variant hover:bg-surface-container-low transition-all duration-200 group active:scale-95">
+<svg class="w-5 h-5" viewbox="0 0 24 24">
+<path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12" fill="currentColor"></path>
+</svg>
+<span class="font-label-md text-label-md">GitHub</span>
+</button>
+</div>
+<div class="relative py-stack-md">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-outline-variant"></div>
+</div>
+<div class="relative flex justify-center text-label-md uppercase">
+<span class="bg-surface px-4 text-on-surface-variant font-label-md">Or continue with</span>
+</div>
+</div>
+<!-- Registration Form -->
+<form class="space-y-stack-md" onsubmit="return false">
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface" for="fullname">Full Name</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl group-focus-within:text-primary transition-colors">person</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none bg-surface text-body-md font-body-md" id="fullname" name="fullname" placeholder="Linus Torvalds" required="" type="text"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface" for="email">Email Address</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl group-focus-within:text-primary transition-colors">mail</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none bg-surface text-body-md font-body-md" id="email" name="email" placeholder="you@company.com" required="" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="font-label-md text-label-md text-on-surface" for="password">Password</label>
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-xl group-focus-within:text-primary transition-colors">lock</span>
+<input class="w-full pl-10 pr-4 py-3 rounded-xl border border-outline-variant focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all outline-none bg-surface text-body-md font-body-md" id="password" name="password" onkeyup="checkPassword(this.value)" placeholder="••••••••" required="" type="password"/>
+</div>
+<!-- Password Strength Indicator -->
+<div class="mt-2 space-y-1">
+<div class="flex gap-1 h-1">
+<div class="strength-bar flex-1 bg-outline-variant" id="strength-1"></div>
+<div class="strength-bar flex-1 bg-outline-variant" id="strength-2"></div>
+<div class="strength-bar flex-1 bg-outline-variant" id="strength-3"></div>
+<div class="strength-bar flex-1 bg-outline-variant" id="strength-4"></div>
+</div>
+<p class="font-label-md text-[10px] text-on-surface-variant uppercase tracking-wider" id="strength-text">Security: Empty</p>
+</div>
+</div>
+<div class="flex items-start gap-3 py-stack-sm">
+<div class="flex items-center h-5">
+<input class="w-4 h-4 text-primary border-outline-variant rounded focus:ring-primary" id="terms" name="terms" required="" type="checkbox"/>
+</div>
+<label class="font-body-md text-label-md text-on-surface-variant leading-tight" for="terms">
+                            I agree to the <a class="text-primary hover:underline" href="#">Terms of Service</a> and <a class="text-primary hover:underline" href="#">Privacy Policy</a>.
+                        </label>
+</div>
+<button class="w-full bg-primary text-white font-label-md py-4 px-6 rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-container hover:text-on-primary-container transition-all duration-300 transform active:scale-95 flex items-center justify-center gap-2" type="submit">
+<span>Create Account</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</form>
+<!-- Footer Text -->
+<div class="text-center pt-stack-md">
+<p class="font-body-md text-body-md text-on-surface-variant">
+                        Already have an account? <a class="text-primary font-bold hover:underline" href="#">Log In</a>
+</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Success Feedback Overlay (Hidden by default) -->
+<div class="fixed bottom-margin-desktop right-margin-desktop transform translate-y-24 opacity-0 transition-all duration-500 z-50" id="success-toast">
+<div class="glass-panel border border-secondary/20 p-stack-md rounded-2xl flex items-center gap-4 shadow-2xl">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div>
+<p class="font-label-md text-label-md font-bold text-on-surface">Welcome to the Expert Tier!</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Check your email for the activation link.</p>
+</div>
+</div>
+</div>
+<script>
+        function checkPassword(password) {
+            const bars = [
+                document.getElementById('strength-1'),
+                document.getElementById('strength-2'),
+                document.getElementById('strength-3'),
+                document.getElementById('strength-4')
+            ];
+            const text = document.getElementById('strength-text');
+            let strength = 0;
+
+            if (password.length > 0) strength++;
+            if (password.length > 6) strength++;
+            if (/[A-Z]/.test(password) && /[0-9]/.test(password)) strength++;
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+
+            const colors = ['bg-outline-variant', 'bg-error', 'bg-tertiary', 'bg-secondary', 'bg-api-teal'];
+            const labels = ['Empty', 'Weak', 'Fair', 'Strong', 'Unbreakable'];
+
+            bars.forEach((bar, i) => {
+                if (i < strength) {
+                    bar.className = `strength-bar flex-1 ${colors[strength]}`;
+                } else {
+                    bar.className = `strength-bar flex-1 bg-outline-variant`;
+                }
+            });
+
+            text.innerText = `Security: ${labels[strength]}`;
+            text.className = `font-label-md text-[10px] uppercase tracking-wider ${strength > 0 ? 'text-' + colors[strength].split('-')[1] : 'text-on-surface-variant'}`;
+        }
+
+        // Mock interaction for button
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const btn = e.target.querySelector('button');
+            const originalContent = btn.innerHTML;
+            btn.innerHTML = `<span class="animate-spin material-symbols-outlined">progress_activity</span> Processing...`;
+            btn.disabled = true;
+
+            setTimeout(() => {
+                const toast = document.getElementById('success-toast');
+                toast.classList.remove('translate-y-24', 'opacity-0');
+                btn.innerHTML = `<span class="material-symbols-outlined">check</span> Created!`;
+                
+                setTimeout(() => {
+                    toast.classList.add('translate-y-24', 'opacity-0');
+                    btn.innerHTML = originalContent;
+                    btn.disabled = false;
+                }, 3000);
+            }, 1500);
+        });
+    </script>
+<!-- Bottom Separation Line for consistent branding as per JSON Footer styles although we don't render full footer here -->
+<div class="fixed bottom-0 left-0 w-full border-t border-outline-variant/30 h-1 bg-surface-container-lowest lg:w-1/2 lg:left-1/2"></div>
+</body></html>

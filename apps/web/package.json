@@ -1,0 +1,32 @@
+{
+  "name": "@stack-mentor/web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "typecheck": "vue-tsc -b"
+  },
+  "dependencies": {
+    "@lucide/vue": "^1.21.0",
+    "@primeuix/themes": "^2.0.3",
+    "@stack-mentor/types": "workspace:*",
+    "@vue-flow/core": "^1.48.2",
+    "gsap": "^3.15.0",
+    "monaco-editor": "^0.55.1",
+    "primevue": "^4.5.5",
+    "vue": "^3.5.38",
+    "vue-router": "^5.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.1",
+    "@types/node": "^24.10.1",
+    "@vitejs/plugin-vue": "^6.0.7",
+    "tailwindcss": "^4.3.1",
+    "typescript": "^6.0.3",
+    "vite": "^8.1.0",
+    "vue-tsc": "^3.1.8"
+  }
+}

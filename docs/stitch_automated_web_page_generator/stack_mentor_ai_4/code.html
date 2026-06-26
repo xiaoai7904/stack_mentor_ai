@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Knowledge Graph | Stack Mentor AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e3000",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-container-high": "#eae6f4",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3effc",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#f0ecf9",
+                        "code-bg": "#1E1E1E",
+                        "background": "#fcf8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "surface-gray": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "inverse-surface": "#302f39",
+                        "surface-dim": "#dcd8e5",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "call-chain-blue": "#2563EB",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-highest": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-tertiary-container": "#ffd2be",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "source-purple": "#7C3AED",
+                        "surface-variant": "#e4e1ee",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-secondary-fixed": "#00201d",
+                        "api-teal": "#0D9488",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-background": "#1b1b24",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-surface": "#1b1b24",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "container-max": "1440px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "code-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .graph-node {
+            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .graph-node:hover {
+            transform: scale(1.1);
+        }
+        .sidebar-scroll::-webkit-scrollbar {
+            width: 4px;
+        }
+        .sidebar-scroll::-webkit-scrollbar-thumb {
+            background: #e4e1ee;
+            border-radius: 10px;
+        }
+        .node-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0.4); }
+            70% { box-shadow: 0 0 0 10px rgba(79, 70, 229, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(79, 70, 229, 0); }
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md overflow-hidden">
+<!-- Shell Container -->
+<div class="flex h-screen overflow-hidden">
+<!-- Sidebar (Shared Component) -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-gray border-r border-border-subtle flex flex-col py-stack-lg z-30">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-display-lg text-primary text-headline-sm tracking-tight leading-tight">Stack Mentor AI</h1>
+<p class="text-[10px] text-on-surface-variant font-medium uppercase tracking-wider">Expert Framework Mentor</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 sidebar-scroll overflow-y-auto space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-medium">Dashboard</span>
+</a>
+<!-- API Explainer -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">api</span>
+<span class="font-medium">API Explainer</span>
+</a>
+<!-- Source Reader -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">code</span>
+<span class="font-medium">Source Reader</span>
+</a>
+<!-- Call Chain Analysis -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">account_tree</span>
+<span class="font-medium">Call Chain Analysis</span>
+</a>
+<!-- Knowledge Graph (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 bg-primary-fixed-dim/20 text-primary font-semibold border-l-2 border-primary rounded-r-xl group" href="#">
+<span class="material-symbols-outlined text-xl" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-medium">Knowledge Graph</span>
+</a>
+<!-- AI Lab -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">science</span>
+<span class="font-medium">AI Lab</span>
+</a>
+<div class="pt-4 pb-2 px-3">
+<p class="text-[11px] font-bold text-outline uppercase tracking-[0.1em]">Education</p>
+</div>
+<!-- AI Interviewer -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">psychology</span>
+<span class="font-medium">AI Interviewer</span>
+</a>
+<!-- Study Path -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">school</span>
+<span class="font-medium">Study Path</span>
+</a>
+<!-- Bookmarks -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">bookmark</span>
+<span class="font-medium">Bookmarks</span>
+</a>
+<!-- History -->
+<a class="flex items-center gap-3 px-3 py-2.5 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl group" href="#">
+<span class="material-symbols-outlined text-xl group-hover:text-primary transition-colors">history</span>
+<span class="font-medium">History</span>
+</a>
+<div class="mt-auto border-t border-border-subtle pt-4 px-2">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-xl" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-medium">Settings</span>
+</a>
+</div>
+</nav>
+<div class="px-4 mt-6">
+<div class="bg-primary p-4 rounded-2xl text-white relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-xs font-bold opacity-80 mb-1">PRO ACCESS</p>
+<p class="text-sm font-semibold mb-3 leading-tight">Unlock Deep Framework Insights</p>
+<button class="bg-white text-primary text-[11px] font-bold px-3 py-1.5 rounded-lg active:scale-95 transition-transform">UPGRADE</button>
+</div>
+<span class="material-symbols-outlined absolute -bottom-4 -right-4 text-7xl opacity-10 rotate-12 group-hover:rotate-0 transition-transform">stars</span>
+</div>
+</div>
+<div class="px-6 mt-6 flex items-center gap-3 border-t border-border-subtle pt-6">
+<div class="w-10 h-10 rounded-full border-2 border-primary-fixed-dim/30 p-0.5 overflow-hidden">
+<img class="w-full h-full object-cover rounded-full" data-alt="A professional headshot of a software engineer named John Doe, minimalist style with soft studio lighting, neutral background, clean aesthetics, corporate but approachable." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCwrZZlgyZsXEnUow2iXcBRwW0S1qbX1MJmplM4vEUIbkOUNVGAGEoPwHx_bU4EtXLa0fxgem2j2tjadvGLdujXjj3WK3P1ryRJ424JiLnFfhBePeEf9qoYemy6JD6HNmOFwqVUDG1s8KvA5DT-pK7BrRBDxKmf_dAAQz9qHwvgenr17mere8mkdl6GiOVbyQS88gMdEzgWH-C6ho5y46KpfewnK51EhEQGqCgOke6Xbe-TcrrWZHirbnXV_oCkW4WDwxTT79vJq0c"/>
+</div>
+<div class="flex-1 overflow-hidden">
+<p class="font-semibold text-sm truncate">John Doe</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-api-teal" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-[10px] text-outline font-bold">Pro Member</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-[260px] relative bg-white overflow-hidden flex flex-col">
+<!-- Top App Bar -->
+<header class="h-16 border-b border-border-subtle flex items-center justify-between px-gutter bg-white/80 backdrop-blur-md sticky top-0 z-20">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-sm text-on-surface">Knowledge Graph</h2>
+<div class="h-4 w-[1px] bg-border-subtle mx-2"></div>
+<div class="flex gap-2">
+<select class="bg-surface-container-low border-none rounded-full px-4 py-1.5 text-label-md text-on-surface focus:ring-1 focus:ring-primary">
+<option>Vue3 Core</option>
+<option>React Internal</option>
+<option>Svelte Compiler</option>
+</select>
+<select class="bg-surface-container-low border-none rounded-full px-4 py-1.5 text-label-md text-on-surface focus:ring-1 focus:ring-primary">
+<option>All Nodes</option>
+<option>Mechanisms Only</option>
+<option>API Only</option>
+</select>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
+<input class="bg-surface-gray border-border-subtle rounded-full pl-10 pr-4 py-1.5 w-64 text-sm focus:ring-2 focus:ring-primary/20 transition-all outline-none" placeholder="Search nodes (e.g. effect, proxy)..." type="text"/>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="bg-primary text-white px-5 py-2 rounded-full text-label-md font-bold hover:shadow-lg transition-all active:scale-95">
+                        Share Graph
+                    </button>
+</div>
+</header>
+<!-- Graph Area -->
+<div class="flex-1 relative overflow-hidden bg-[#FDFDFF]">
+<!-- SVG Connections Layer -->
+<svg class="absolute inset-0 w-full h-full pointer-events-none opacity-20">
+<defs>
+<marker id="arrowhead" markerheight="7" markerwidth="10" orient="auto" refx="0" refy="3.5">
+<polygon fill="#4F46E5" points="0 0, 10 3.5, 0 7"></polygon>
+</marker>
+</defs>
+<g stroke="#4F46E5" stroke-width="1.5">
+<!-- Connecting lines generated dynamically in a real app, here hardcoded for visualization -->
+<path d="M500,400 L650,250" stroke-dasharray="4"></path>
+<path d="M500,400 L350,250" stroke-dasharray="4"></path>
+<path d="M500,400 L500,200" stroke-dasharray="4"></path>
+<path d="M500,400 L650,550" stroke-dasharray="4"></path>
+<path d="M500,400 L350,550" stroke-dasharray="4"></path>
+<path d="M500,400 L800,400" stroke-dasharray="4"></path>
+</g>
+</svg>
+<!-- Floating Interactive Nodes -->
+<div class="absolute inset-0 p-10 cursor-grab active:cursor-grabbing" id="graph-container">
+<!-- Root Node -->
+<div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10">
+<div class="graph-node node-pulse bg-primary p-12 rounded-full flex flex-col items-center justify-center text-white shadow-2xl shadow-primary/40 border-4 border-white">
+<span class="material-symbols-outlined text-4xl mb-2" style="font-variation-settings: 'FILL' 1;">hub</span>
+<span class="font-bold text-lg">响应式系统</span>
+<span class="text-[10px] opacity-70 uppercase tracking-widest font-bold">Reactive System</span>
+</div>
+</div>
+<!-- Surrounding Nodes -->
+<!-- REF -->
+<div class="absolute left-[30%] top-[25%] graph-node bg-white p-6 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-4 cursor-pointer hover:border-primary transition-all">
+<div class="w-10 h-10 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">radio_button_checked</span>
+</div>
+<div>
+<p class="font-bold text-sm">ref</p>
+<p class="text-[11px] text-outline">API / Value Wrapper</p>
+</div>
+</div>
+<!-- REACTIVE -->
+<div class="absolute left-[65%] top-[20%] graph-node bg-white p-6 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-4 cursor-pointer hover:border-primary transition-all">
+<div class="w-10 h-10 bg-tertiary-fixed text-on-tertiary-fixed-variant rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">rebase_edit</span>
+</div>
+<div>
+<p class="font-bold text-sm">reactive</p>
+<p class="text-[11px] text-outline">API / Proxy Base</p>
+</div>
+</div>
+<!-- EFFECT -->
+<div class="absolute left-[25%] top-[65%] graph-node bg-white p-6 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-4 cursor-pointer border-primary ring-2 ring-primary/10">
+<div class="w-10 h-10 bg-primary-fixed-dim text-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<p class="font-bold text-sm">effect</p>
+<p class="text-[11px] text-outline">Mechanism / Side Effect</p>
+</div>
+<div class="absolute -top-2 -right-2 bg-primary text-white text-[9px] font-bold px-2 py-0.5 rounded-full">SELECTED</div>
+</div>
+<!-- COMPUTED -->
+<div class="absolute left-[70%] top-[55%] graph-node bg-white p-6 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-4 cursor-pointer hover:border-primary transition-all">
+<div class="w-10 h-10 bg-api-teal/10 text-api-teal rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">calculate</span>
+</div>
+<div>
+<p class="font-bold text-sm">computed</p>
+<p class="text-[11px] text-outline">API / Memoized</p>
+</div>
+</div>
+<!-- WATCH -->
+<div class="absolute left-[55%] top-[78%] graph-node bg-white p-6 rounded-2xl shadow-lg border border-border-subtle flex items-center gap-4 cursor-pointer hover:border-primary transition-all">
+<div class="w-10 h-10 bg-source-purple/10 text-source-purple rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<div>
+<p class="font-bold text-sm">watch</p>
+<p class="text-[11px] text-outline">API / Observer</p>
+</div>
+</div>
+<!-- PROXY -->
+<div class="absolute left-[80%] top-[35%] graph-node bg-white p-4 rounded-xl shadow-sm border border-border-subtle flex items-center gap-3 cursor-pointer hover:bg-surface-container-low opacity-60">
+<span class="material-symbols-outlined text-outline">security</span>
+<span class="text-xs font-semibold">Proxy Handler</span>
+</div>
+</div>
+<!-- Floating Controls -->
+<div class="absolute bottom-10 left-10 flex flex-col gap-2">
+<div class="bg-white rounded-2xl shadow-xl border border-border-subtle flex flex-col">
+<button class="p-3 border-b border-border-subtle hover:bg-surface-container rounded-t-2xl transition-colors">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="p-3 border-b border-border-subtle hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined">remove</span>
+</button>
+<button class="p-3 hover:bg-surface-container rounded-b-2xl transition-colors">
+<span class="material-symbols-outlined">filter_center_focus</span>
+</button>
+</div>
+<button class="bg-white p-3 rounded-2xl shadow-xl border border-border-subtle hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">layers</span>
+</button>
+</div>
+<!-- Legend Card -->
+<div class="absolute top-6 left-6 bg-white/60 backdrop-blur-md p-4 rounded-2xl border border-border-subtle shadow-sm pointer-events-none">
+<p class="text-[11px] font-bold text-outline uppercase tracking-widest mb-3">Graph Legend</p>
+<div class="space-y-2">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-primary shadow-sm"></div>
+<span class="text-xs font-medium">Core Concept</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-api-teal"></div>
+<span class="text-xs font-medium">Public API</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-full bg-outline-variant"></div>
+<span class="text-xs font-medium">Internal Helper</span>
+</div>
+</div>
+</div>
+<!-- Right Sidebar: Node Details -->
+<aside class="absolute right-0 top-0 h-full w-[340px] bg-white border-l border-border-subtle shadow-2xl flex flex-col z-10 transform translate-x-0 transition-transform duration-300">
+<div class="p-6 border-b border-border-subtle flex justify-between items-center bg-surface-gray/50">
+<h3 class="font-headline-sm text-on-surface">节点详情</h3>
+<button class="text-outline hover:text-on-surface">
+<span class="material-symbols-outlined">close</span>
+</button>
+</div>
+<div class="flex-1 overflow-y-auto sidebar-scroll p-6 space-y-8">
+<!-- Node Identity -->
+<div class="flex items-center gap-4">
+<div class="w-16 h-16 bg-primary-fixed-dim text-primary rounded-2xl flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">bolt</span>
+</div>
+<div>
+<h4 class="text-2xl font-bold">effect</h4>
+<div class="flex gap-2 mt-1">
+<span class="bg-surface-container px-2 py-0.5 rounded text-[10px] font-bold text-on-surface-variant uppercase">Mechanism</span>
+<span class="bg-primary-container px-2 py-0.5 rounded text-[10px] font-bold text-on-primary-container uppercase">Internal</span>
+</div>
+</div>
+</div>
+<!-- Description -->
+<div class="space-y-2">
+<h5 class="text-xs font-bold text-outline uppercase tracking-wider">Description</h5>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+<code class="bg-surface-container px-1 rounded font-code-sm text-primary">effect</code> 是 Vue 3 响应式系统的核心。它是收集依赖、并在依赖变更时触发更新的基本单位。它是 render 函数、computed 和 watch 的底层支柱。
+                            </p>
+</div>
+<!-- Code Example -->
+<div class="space-y-3">
+<div class="flex justify-between items-center">
+<h5 class="text-xs font-bold text-outline uppercase tracking-wider">Implementation</h5>
+<span class="text-[10px] font-medium text-api-teal">reactive/effect.ts</span>
+</div>
+<div class="bg-code-bg rounded-xl p-4 font-code-sm overflow-x-auto text-[#D4D4D4] shadow-inner">
+<pre><code><span class="text-source-purple">function</span> <span class="text-call-chain-blue">effect</span>(fn, options) {
+  <span class="text-outline">// create reactive effect</span>
+  <span class="text-source-purple">const</span> _effect = <span class="text-source-purple">new</span> ReactiveEffect(fn)
+  <span class="text-outline">// init effect immediately</span>
+  _effect.run()
+}</code></pre>
+</div>
+</div>
+<!-- Related Nodes -->
+<div class="space-y-4">
+<h5 class="text-xs font-bold text-outline uppercase tracking-wider">Related Connections</h5>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-3 rounded-xl border border-border-subtle hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-secondary-container/20 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-lg">radio_button_checked</span>
+</div>
+<span class="text-sm font-semibold">ref</span>
+</div>
+<span class="material-symbols-outlined text-outline text-lg">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl border border-border-subtle hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-api-teal/10 flex items-center justify-center text-api-teal">
+<span class="material-symbols-outlined text-lg">calculate</span>
+</div>
+<span class="text-sm font-semibold">computed</span>
+</div>
+<span class="material-symbols-outlined text-outline text-lg">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded-xl border border-border-subtle hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded bg-tertiary-fixed/20 flex items-center justify-center text-tertiary">
+<span class="material-symbols-outlined text-lg">rebase_edit</span>
+</div>
+<span class="text-sm font-semibold">reactive</span>
+</div>
+<span class="material-symbols-outlined text-outline text-lg">chevron_right</span>
+</div>
+</div>
+</div>
+</div>
+<div class="p-6 border-t border-border-subtle bg-surface-gray/50">
+<button class="w-full bg-primary text-white font-bold py-3 rounded-xl shadow-lg shadow-primary/20 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+                            查看完整源码文档
+                        </button>
+</div>
+</aside>
+</div>
+</main>
+</div>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const graphContainer = document.getElementById('graph-container');
+            const nodes = document.querySelectorAll('.graph-node');
+
+            // Simple parallax/movement effect for nodes
+            graphContainer.addEventListener('mousemove', (e) => {
+                const { clientX, clientY } = e;
+                const centerX = window.innerWidth / 2;
+                const centerY = window.innerHeight / 2;
+                
+                const moveX = (clientX - centerX) / 50;
+                const moveY = (clientY - centerY) / 50;
+
+                nodes.forEach((node, index) => {
+                    const depth = (index % 3) + 1;
+                    node.style.transform = `translate(${moveX * depth}px, ${moveY * depth}px)`;
+                });
+            });
+
+            // Toggle sidebar logic (visual mock)
+            const detailClose = document.querySelector('aside button.text-outline');
+            detailClose.addEventListener('click', () => {
+                const aside = detailClose.closest('aside');
+                aside.style.transform = 'translateX(100%)';
+            });
+        });
+    </script>
+</body></html>

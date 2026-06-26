@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Source Reader - Stack Mentor AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e3000",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-container-high": "#eae6f4",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3effc",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#f0ecf9",
+                        "code-bg": "#1E1E1E",
+                        "background": "#fcf8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "surface-gray": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "inverse-surface": "#302f39",
+                        "surface-dim": "#dcd8e5",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "call-chain-blue": "#2563EB",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-highest": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-tertiary-container": "#ffd2be",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "source-purple": "#7C3AED",
+                        "surface-variant": "#e4e1ee",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-secondary-fixed": "#00201d",
+                        "api-teal": "#0D9488",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-background": "#1b1b24",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-surface": "#1b1b24",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "container-max": "1440px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "code-sm": ["JetBrains Mono"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .code-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .code-scrollbar::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        .code-scrollbar::-webkit-scrollbar-thumb {
+            background: #464555;
+            border-radius: 4px;
+        }
+        .code-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #777587;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- Persistent SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-gray border-r border-border-subtle flex flex-col py-stack-lg z-50">
+<div class="px-gutter mb-8">
+<h1 class="font-display-lg text-display-lg font-bold text-primary">Stack Mentor AI</h1>
+<p class="text-on-surface-variant font-label-md">Expert Framework Mentor</p>
+</div>
+<nav class="flex-1 overflow-y-auto px-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">api</span>
+<span class="font-body-md">API Explainer</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-primary-fixed-dim/20 text-primary font-semibold border-l-2 border-primary transition-colors duration-200 rounded-r-lg" href="#">
+<span class="material-symbols-outlined">code</span>
+<span class="font-body-md">Source Reader</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="font-body-md">Call Chain Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="font-body-md">Knowledge Graph</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="font-body-md">AI Lab</span>
+</a>
+<div class="pt-4 pb-2 border-t border-border-subtle mt-4">
+<p class="px-3 text-xs font-bold uppercase text-outline mb-2">Learning</p>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="font-body-md">AI Interviewer</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="font-body-md">Study Path</span>
+</a>
+</div>
+<div class="pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="font-body-md">Bookmarks</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-body-md">History</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</div>
+</nav>
+<div class="px-4 mt-auto">
+<div class="bg-primary p-4 rounded-xl text-on-primary mb-6">
+<p class="font-semibold text-sm">Get Pro Access</p>
+<p class="text-xs opacity-80 mt-1">Unlock deep-dive source analysis and expert mentorship.</p>
+<button class="mt-3 w-full bg-white text-primary font-bold py-2 rounded-lg text-xs hover:bg-opacity-90 transition-all">Upgrade Now</button>
+</div>
+<div class="flex items-center gap-3 px-2 py-3 border-t border-border-subtle">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="A professional studio portrait of a modern software engineer, John Doe, wearing a clean white t-shirt against a minimal light gray background. The lighting is soft and corporate, creating a professional yet approachable aesthetic. High quality photography style, sharp focus on eyes, shallow depth of field." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB-i8vdp4XjTi0uoYR39wT4DQawrKVz_egIRY_a2tqT67moZhfV8EwMs9fWS4-x3SBHUC5FJFhajb7UZl8HNHvvg-D-EPRi3By03G2z1wQIAcCafPrKUmXyO1WjEw6LC972ICCrpreEUbyqq4qosnSnnirc-uZhngUGUN28w463cw1o5QUA88ne3uacPMsWfTZ-ZY48EOGYctIw_4xZPt-BPgPpgf8WlZmxX_w4LYaXbE_Tm21vTE1V-twmiIQGF9sym_RAVWv5qvs"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="font-semibold text-sm truncate">John Doe</p>
+<p class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">stars</span>
+                        Pro Member
+                    </p>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-sidebar-width min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle h-16 flex items-center justify-between px-gutter">
+<div class="flex items-center gap-6 flex-1">
+<div class="flex flex-col">
+<h2 class="font-headline-sm text-headline-sm text-primary">源码阅读助手</h2>
+<p class="text-xs text-on-surface-variant">输入函数或追踪源码实现，AI 帮助你理解核心流程</p>
+</div>
+<div class="flex-1 max-w-2xl flex items-center gap-3">
+<div class="relative flex-1 group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container-lowest border border-border-subtle rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-sm" placeholder="例如: ref 的实现原理" type="text"/>
+</div>
+<button class="bg-primary text-on-primary px-6 py-2 rounded-lg font-semibold text-sm hover:opacity-90 transition-opacity">查询</button>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1 text-on-surface-variant mr-4">
+<span class="text-xs font-medium">Docs</span>
+<span class="material-symbols-outlined text-base">expand_more</span>
+</div>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Content Stage -->
+<div class="p-gutter flex-1 flex flex-col gap-gutter">
+<!-- File Selector Bar -->
+<div class="flex items-center justify-between bg-white border border-border-subtle p-stack-md rounded-xl shadow-sm">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-gray border border-border-subtle rounded-lg">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">文件路径</span>
+<div class="flex items-center gap-2 text-sm font-medium">
+<span class="text-primary">packages/reactivity/src/ref.ts</span>
+<span class="material-symbols-outlined text-base text-outline">unfold_more</span>
+</div>
+</div>
+<div class="flex items-center gap-2 px-3 py-1.5 bg-surface-gray border border-border-subtle rounded-lg">
+<span class="text-xs font-bold text-outline uppercase tracking-wider">行号</span>
+<div class="flex items-center gap-2 text-sm font-medium">
+<span>1-100</span>
+<span class="material-symbols-outlined text-base text-outline">unfold_more</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 text-xs font-semibold text-on-surface-variant px-3 py-1.5 hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-base">content_copy</span>
+                        复制文件路径
+                    </button>
+<button class="flex items-center gap-2 text-xs font-semibold text-on-surface-variant px-3 py-1.5 hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-base">open_in_new</span>
+                        在 GitHub 查看
+                    </button>
+</div>
+</div>
+<!-- Workspace Panels -->
+<div class="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-gutter min-h-[600px]">
+<!-- Code Panel (8 columns) -->
+<div class="lg:col-span-7 bg-code-bg rounded-xl overflow-hidden flex flex-col border border-[#333]">
+<div class="bg-[#252526] px-4 py-2 flex items-center justify-between border-b border-[#333]">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-api-teal text-lg">javascript</span>
+<span class="text-[#cccccc] font-code-sm text-xs">ref.ts</span>
+</div>
+<div class="flex items-center gap-4">
+<span class="text-[#888] font-code-sm text-[11px]">Typescript</span>
+<button class="text-[#888] hover:text-white transition-colors">
+<span class="material-symbols-outlined text-lg">more_horiz</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-auto code-scrollbar font-code-sm text-[#d4d4d4] p-4 bg-[#1e1e1e] leading-relaxed">
+<pre class="grid grid-cols-[3rem_1fr] gap-4"><span class="text-[#858585] text-right select-none">1</span><span class="text-[#6A9955]">/* packages/reactivity/src/ref.ts */</span>
+<span class="text-[#858585] text-right select-none">2</span><span><span class="text-[#569cd6]">import</span> { <span class="text-[#9cdcfe]">activeEffect</span>, <span class="text-[#9cdcfe]">shouldTrack</span>, <span class="text-[#9cdcfe]">trackEffects</span> } <span class="text-[#569cd6]">from</span> <span class="text-[#ce9178]">'./effect'</span></span>
+<span class="text-[#858585] text-right select-none">3</span><span></span>
+<span class="text-[#858585] text-right select-none">4</span><span><span class="text-[#569cd6]">export function</span> <span class="text-[#dcdcaa]">ref</span>(<span class="text-[#9cdcfe]">value</span>?: <span class="text-[#4ec9b0]">unknown</span>) {</span>
+<span class="text-[#858585] text-right select-none">5</span><span>  <span class="text-[#c586b0]">return</span> <span class="text-[#dcdcaa]">createRef</span>(<span class="text-[#9cdcfe]">value</span>, <span class="text-[#569cd6]">false</span>)</span>
+<span class="text-[#858585] text-right select-none">6</span><span>}</span>
+<span class="text-[#858585] text-right select-none">7</span><span></span>
+<span class="text-[#858585] text-right select-none">8</span><span><span class="text-[#569cd6]">class</span> <span class="text-[#4ec9b0]">RefImpl</span>&lt;<span class="text-[#4ec9b0]">T</span>&gt; {</span>
+<span class="text-[#858585] text-right select-none">9</span><span>  <span class="text-[#569cd6]">private</span> <span class="text-[#9cdcfe]">_value</span>: <span class="text-[#4ec9b0]">T</span></span>
+<span class="text-[#858585] text-right select-none">10</span><span>  <span class="text-[#569cd6]">private</span> <span class="text-[#9cdcfe]">_rawValue</span>: <span class="text-[#4ec9b0]">T</span></span>
+<span class="text-[#858585] text-right select-none">11</span><span>  <span class="text-[#569cd6]">public</span> <span class="text-[#9cdcfe]">dep</span>?: <span class="text-[#4ec9b0]">Dep</span> = <span class="text-[#569cd6]">undefined</span></span>
+<span class="text-[#858585] text-right select-none">12</span><span>  <span class="text-[#569cd6]">public readonly</span> <span class="text-[#9cdcfe]">__v_isRef</span> = <span class="text-[#569cd6]">true</span></span>
+<span class="text-[#858585] text-right select-none">13</span><span></span>
+<span class="text-[#858585] text-right select-none">14</span><span>  <span class="text-[#dcdcaa]">constructor</span>(<span class="text-[#9cdcfe]">value</span>: <span class="text-[#4ec9b0]">T</span>, <span class="text-[#569cd6]">public readonly</span> <span class="text-[#9cdcfe]">__v_isShallow</span>: <span class="text-[#4ec9b0]">boolean</span>) {</span>
+<span class="text-[#858585] text-right select-none">15</span><span>    <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">_rawValue</span> = <span class="text-[#9cdcfe]">__v_isShallow</span> ? <span class="text-[#9cdcfe]">value</span> : <span class="text-[#dcdcaa]">toRaw</span>(<span class="text-[#9cdcfe]">value</span>)</span>
+<span class="text-[#858585] text-right select-none">16</span><span>    <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">_value</span> = <span class="text-[#9cdcfe]">__v_isShallow</span> ? <span class="text-[#9cdcfe]">value</span> : <span class="text-[#dcdcaa]">toReactive</span>(<span class="text-[#9cdcfe]">value</span>)</span>
+<span class="text-[#858585] text-right select-none">17</span><span>  }</span>
+<span class="text-[#858585] text-right select-none">18</span><span></span>
+<span class="text-[#858585] text-right select-none">19</span><span>  <span class="text-[#569cd6]">get</span> <span class="text-[#dcdcaa]">value</span>() {</span>
+<span class="text-[#858585] text-right select-none">20</span><span>    <span class="text-[#dcdcaa]">trackRefValue</span>(<span class="text-[#569cd6]">this</span>)</span>
+<span class="text-[#858585] text-right select-none">21</span><span>    <span class="text-[#c586b0]">return</span> <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">_value</span></span>
+<span class="text-[#858585] text-right select-none">22</span><span>  }</span>
+<span class="text-[#858585] text-right select-none">23</span><span></span>
+<span class="text-[#858585] text-right select-none">24</span><span>  <span class="text-[#569cd6]">set</span> <span class="text-[#dcdcaa]">value</span>(<span class="text-[#9cdcfe]">newVal</span>) {</span>
+<span class="text-[#858585] text-right select-none">25</span><span>    <span class="text-[#9cdcfe]">newVal</span> = <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">__v_isShallow</span> ? <span class="text-[#9cdcfe]">newVal</span> : <span class="text-[#dcdcaa]">toRaw</span>(<span class="text-[#9cdcfe]">newVal</span>)</span>
+<span class="text-[#858585] text-right select-none">26</span><span>    <span class="text-[#c586b0]">if</span> (<span class="text-[#dcdcaa]">hasChanged</span>(<span class="text-[#9cdcfe]">newVal</span>, <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">_rawValue</span>)) {</span>
+<span class="text-[#858585] text-right select-none">27</span><span>      <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">_rawValue</span> = <span class="text-[#9cdcfe]">newVal</span></span>
+<span class="text-[#858585] text-right select-none">28</span><span>      <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">_value</span> = <span class="text-[#569cd6]">this</span>.<span class="text-[#9cdcfe]">__v_isShallow</span> ? <span class="text-[#9cdcfe]">newVal</span> : <span class="text-[#dcdcaa]">toReactive</span>(<span class="text-[#9cdcfe]">newVal</span>)</span>
+<span class="text-[#858585] text-right select-none">29</span><span>      <span class="text-[#dcdcaa]">triggerRefValue</span>(<span class="text-[#569cd6]">this</span>, <span class="text-[#9cdcfe]">newVal</span>)</span>
+<span class="text-[#858585] text-right select-none">30</span><span>    }</span>
+<span class="text-[#858585] text-right select-none">31</span><span>  }</span>
+<span class="text-[#858585] text-right select-none">32</span><span>}</span>
+</pre>
+</div>
+</div>
+<!-- AI Analysis Panel (5 columns) -->
+<div class="lg:col-span-5 flex flex-col gap-4">
+<div class="bg-white border border-border-subtle rounded-xl flex-1 flex flex-col overflow-hidden shadow-sm">
+<!-- Panel Tabs -->
+<div class="bg-surface-gray border-b border-border-subtle flex">
+<button class="px-5 py-3 text-sm font-bold text-primary border-b-2 border-primary bg-white">源码解析</button>
+<button class="px-5 py-3 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">流程图</button>
+<button class="px-5 py-3 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">关键点</button>
+<button class="px-5 py-3 text-sm font-medium text-on-surface-variant hover:text-on-surface transition-colors">相关引用</button>
+</div>
+<!-- Panel Body -->
+<div class="flex-1 overflow-y-auto p-stack-lg space-y-8">
+<!-- Logic Header -->
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-primary-fixed-dim/30 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl">auto_awesome</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm">AI 解析结果</h3>
+</div>
+<span class="text-[10px] uppercase font-bold text-outline-variant bg-surface-container-high px-2 py-1 rounded">GPT-4 Turbo</span>
+</div>
+<!-- Logic Content -->
+<section>
+<h4 class="text-xs font-bold text-outline uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="w-1 h-1 bg-primary rounded-full"></span>
+                                    逻辑简析
+                                </h4>
+<ul class="space-y-4">
+<li class="flex gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-fixed-dim flex-shrink-0"></div>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+<span class="font-bold text-on-surface">createRef:</span> 核心工厂函数，通过 <code class="font-code-sm bg-surface-container px-1 rounded text-primary">new RefImpl</code> 初始化一个响应式引用。
+                                        </p>
+</li>
+<li class="flex gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-fixed-dim flex-shrink-0"></div>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+<span class="font-bold text-on-surface">RefImpl 类:</span> 实现了 getter 和 setter。Getter 负责调用 <code class="font-code-sm text-call-chain-blue">trackRefValue</code> 追踪依赖；Setter 负责值比对及 <code class="font-code-sm text-call-chain-blue">triggerRefValue</code> 派发更新。
+                                        </p>
+</li>
+<li class="flex gap-3">
+<div class="mt-1.5 w-1.5 h-1.5 rounded-full bg-primary-fixed-dim flex-shrink-0"></div>
+<p class="text-body-md text-on-surface-variant leading-relaxed">
+<span class="font-bold text-on-surface">__v_isRef:</span> 标记位，用于 Vue 内部判断一个对象是否为由 ref 创建的代理。
+                                        </p>
+</li>
+</ul>
+</section>
+<!-- Key Points -->
+<section>
+<h4 class="text-xs font-bold text-outline uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="w-1 h-1 bg-api-teal rounded-full"></span>
+                                    关键点
+                                </h4>
+<div class="grid grid-cols-1 gap-2">
+<div class="p-3 rounded-lg border border-border-subtle bg-surface-container-lowest flex items-start gap-3 hover:border-primary/30 transition-colors cursor-help group">
+<span class="material-symbols-outlined text-api-teal group-hover:scale-110 transition-transform">info</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">使用 get/set 拦截 value 访问</p>
+<p class="text-xs text-on-surface-variant mt-1">Ref 不同于 Reactive 的 Proxy 拦截，它通过 class 的原生访问器实现。</p>
+</div>
+</div>
+<div class="p-3 rounded-lg border border-border-subtle bg-surface-container-lowest flex items-start gap-3 hover:border-primary/30 transition-colors cursor-help group">
+<span class="material-symbols-outlined text-api-teal group-hover:scale-110 transition-transform">bolt</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">依赖追踪: trackRefValue</p>
+<p class="text-xs text-on-surface-variant mt-1">在访问 .value 时手动建立 Effect 与 Ref 之间的联系。</p>
+</div>
+</div>
+<div class="p-3 rounded-lg border border-border-subtle bg-surface-container-lowest flex items-start gap-3 hover:border-primary/30 transition-colors cursor-help group">
+<span class="material-symbols-outlined text-api-teal group-hover:scale-110 transition-transform">loop</span>
+<div>
+<p class="text-sm font-semibold text-on-surface">派发更新: triggerRefValue</p>
+<p class="text-xs text-on-surface-variant mt-1">检测到 hasChanged 为 true 后触发副作用重新执行。</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Dependencies -->
+<section>
+<h4 class="text-xs font-bold text-outline uppercase tracking-widest mb-4 flex items-center gap-2">
+<span class="w-1 h-1 bg-source-purple rounded-full"></span>
+                                    相关文件
+                                </h4>
+<div class="flex flex-wrap gap-2">
+<a class="px-3 py-1.5 rounded-full bg-surface-container-high border border-border-subtle text-xs font-medium text-on-surface hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">description</span>
+                                        reactive.ts
+                                    </a>
+<a class="px-3 py-1.5 rounded-full bg-surface-container-high border border-border-subtle text-xs font-medium text-on-surface hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">description</span>
+                                        effect.ts
+                                    </a>
+<a class="px-3 py-1.5 rounded-full bg-surface-container-high border border-border-subtle text-xs font-medium text-on-surface hover:bg-primary hover:text-white hover:border-primary transition-all flex items-center gap-2" href="#">
+<span class="material-symbols-outlined text-sm">description</span>
+                                        dep.ts
+                                    </a>
+</div>
+</section>
+</div>
+<!-- Panel Footer -->
+<div class="p-4 border-t border-border-subtle bg-surface-container-lowest">
+<button class="w-full flex items-center justify-center gap-2 bg-primary text-white py-3 rounded-xl font-bold shadow-lg shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 transition-all">
+<span class="material-symbols-outlined">psychology</span>
+                                深度对话 AI 导师
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Contextual FAB (Hidden on this sub-page per rules) -->
+<!-- Determined as Focused/Transactional view for code analysis, thus FAB suppressed -->
+<script>
+        // Simple Interaction logic for tabs
+        const tabButtons = document.querySelectorAll('.bg-surface-gray button');
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                tabButtons.forEach(b => {
+                    b.classList.remove('text-primary', 'border-b-2', 'border-primary', 'bg-white');
+                    b.classList.add('text-on-surface-variant', 'font-medium');
+                });
+                btn.classList.add('text-primary', 'border-b-2', 'border-primary', 'bg-white');
+                btn.classList.remove('text-on-surface-variant', 'font-medium');
+                btn.classList.add('font-bold');
+            });
+        });
+
+        // Hover animation for code lines
+        const lines = document.querySelectorAll('.code-scrollbar pre span:not(.select-none)');
+        lines.forEach(line => {
+            line.addEventListener('mouseenter', () => {
+                line.parentElement.classList.add('bg-white/5');
+            });
+            line.addEventListener('mouseleave', () => {
+                line.parentElement.classList.remove('bg-white/5');
+            });
+        });
+    </script>
+</body></html>

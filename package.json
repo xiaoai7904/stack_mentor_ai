@@ -1,0 +1,16 @@
+{
+  "name": "stack-mentor-ai",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.6.5",
+  "scripts": {
+    "dev": "pnpm --parallel --filter @stack-mentor/web --filter @stack-mentor/api dev",
+    "dev:web": "pnpm --filter @stack-mentor/web dev",
+    "dev:api": "pnpm --filter @stack-mentor/api dev",
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck"
+  },
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

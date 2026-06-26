@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>AI Lab - Stack Mentor AI</title>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com/css10?family=Inter:wght@400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e3000",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-container-high": "#eae6f4",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3effc",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#f0ecf9",
+                        "code-bg": "#1E1E1E",
+                        "background": "#fcf8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "surface-gray": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "inverse-surface": "#302f39",
+                        "surface-dim": "#dcd8e5",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "call-chain-blue": "#2563EB",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-highest": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-tertiary-container": "#ffd2be",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "source-purple": "#7C3AED",
+                        "surface-variant": "#e4e1ee",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-secondary-fixed": "#00201d",
+                        "api-teal": "#0D9488",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-background": "#1b1b24",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-surface": "#1b1b24",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "container-max": "1440px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "code-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .code-editor-scrollbar::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        .code-editor-scrollbar::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+        .code-editor-scrollbar::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+        .code-editor-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+        .line-numbers {
+            user-select: none;
+            color: #5a5a5a;
+            text-align: right;
+            padding-right: 16px;
+            font-family: 'JetBrains Mono', monospace;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-background min-h-screen">
+<!-- Sidebar Navigation Shell -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-gray dark:bg-inverse-surface border-r border-border-subtle dark:border-outline flex flex-col h-screen py-stack-lg z-40">
+<div class="px-6 mb-8">
+<h1 class="font-display-lg text-display-lg font-bold text-primary dark:text-inverse-primary leading-tight">Stack Mentor AI</h1>
+<p class="text-on-surface-variant font-label-md text-label-md mt-1">Expert Framework Mentor</p>
+</div>
+<nav class="flex-1 px-3 space-y-1 overflow-y-auto">
+<!-- Navigation Items Mapping from JSON -->
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">api</span>
+<span class="font-body-md text-body-md">API Explainer</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">code</span>
+<span class="font-body-md text-body-md">Source Reader</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">account_tree</span>
+<span class="font-body-md text-body-md">Call Chain Analysis</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">hub</span>
+<span class="font-body-md text-body-md">Knowledge Graph</span>
+</a>
+<!-- Active State: AI Lab -->
+<a class="flex items-center px-4 py-2 bg-primary-fixed-dim/20 text-primary font-semibold border-l-2 border-primary transition-all duration-200 rounded-r-lg group" href="#">
+<span class="material-symbols-outlined mr-3" style="font-variation-settings: 'FILL' 1;">science</span>
+<span class="font-body-md text-body-md">AI Lab</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">psychology</span>
+<span class="font-body-md text-body-md">AI Interviewer</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">school</span>
+<span class="font-body-md text-body-md">Study Path</span>
+</a>
+<div class="pt-4 mt-4 border-t border-border-subtle">
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">bookmark</span>
+<span class="font-body-md text-body-md">Bookmarks</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">history</span>
+<span class="font-body-md text-body-md">History</span>
+</a>
+<a class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined mr-3 group-hover:text-primary">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</div>
+</nav>
+<div class="px-3 mt-auto pt-4">
+<button class="w-full bg-primary text-on-primary py-3 px-4 rounded-xl font-semibold text-body-md hover:shadow-lg transition-all active:scale-95 mb-6">
+                Get Pro Access
+            </button>
+<div class="flex items-center px-4 py-3 bg-surface-container-low rounded-xl">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container mr-3 font-bold">
+                    JD
+                </div>
+<div class="flex flex-col">
+<span class="font-semibold text-body-md">John Doe</span>
+<span class="text-label-md font-label-md text-primary flex items-center">
+<span class="material-symbols-outlined text-xs mr-1" style="font-variation-settings: 'FILL' 1;">stars</span>
+                        Pro Member
+                    </span>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-[260px] min-h-screen flex flex-col">
+<!-- Top App Bar -->
+<header class="sticky top-0 z-50 bg-surface/80 backdrop-blur-md border-b border-border-subtle shadow-sm h-16 flex items-center justify-between px-gutter">
+<div class="flex items-center space-x-8">
+<h2 class="font-headline-sm text-headline-sm text-primary">AI Lab</h2>
+<nav class="hidden md:flex items-center space-x-6">
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Docs</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Vite</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Vue3</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors text-body-md" href="#">Discord</a>
+</nav>
+</div>
+<div class="flex items-center space-x-4">
+<div class="relative group">
+<span class="absolute inset-y-0 left-3 flex items-center text-on-surface-variant">
+<span class="material-symbols-outlined text-sm">search</span>
+</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary w-64 text-body-md" placeholder="Search templates, snippets..." type="text"/>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</header>
+<!-- Editor Interface -->
+<div class="flex-1 flex flex-col p-stack-md bg-background">
+<!-- Lab Controls -->
+<div class="flex items-center justify-between mb-4">
+<div class="flex bg-surface-container-low p-1 rounded-lg border border-border-subtle">
+<button class="px-4 py-1.5 rounded-md bg-white shadow-sm text-primary font-semibold text-body-md">Vue SFC</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:bg-white/50 transition-colors text-body-md">JavaScript</button>
+<button class="px-4 py-1.5 rounded-md text-on-surface-variant hover:bg-white/50 transition-colors text-body-md">TypeScript</button>
+</div>
+<div class="flex items-center space-x-3">
+<button class="flex items-center px-4 py-2 text-on-surface-variant hover:bg-surface-container-high rounded-lg transition-colors font-semibold text-body-md" id="clear-btn">
+<span class="material-symbols-outlined mr-2">delete</span>
+                        Clear
+                    </button>
+<button class="flex items-center px-6 py-2 bg-primary text-on-primary rounded-lg shadow-md hover:shadow-lg active:scale-95 transition-all font-semibold text-body-md" id="run-btn">
+<span class="material-symbols-outlined mr-2">play_arrow</span>
+                        Run
+                    </button>
+</div>
+</div>
+<!-- Editor Grid Layout -->
+<div class="flex-1 grid grid-cols-12 gap-stack-md h-full">
+<!-- Code Area (Left) -->
+<div class="col-span-12 lg:col-span-7 flex flex-col h-full bg-code-bg rounded-xl overflow-hidden border border-border-subtle shadow-xl">
+<div class="flex items-center justify-between px-4 py-2 bg-[#252526] border-b border-[#333]">
+<div class="flex items-center space-x-2">
+<span class="material-symbols-outlined text-api-teal text-sm">code</span>
+<span class="text-white font-code-sm text-code-sm opacity-80 uppercase">App.vue</span>
+</div>
+<div class="flex items-center space-x-2">
+<button class="p-1 text-on-surface-variant hover:text-white transition-colors">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+</div>
+<div class="flex-1 flex overflow-hidden font-code-sm text-code-sm">
+<div class="line-numbers py-4 bg-[#1e1e1e] border-r border-[#333] min-w-[50px]">
+                            1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14<br/>15<br/>16<br/>17<br/>18<br/>19<br/>20
+                        </div>
+<pre class="flex-1 p-4 text-[#d4d4d4] overflow-auto code-editor-scrollbar"><code class="block whitespace-pre-wrap"><span class="text-source-purple"><template></span>
+  <span class="text-api-teal"><div</span> <span class="text-[#9cdcfe]">class</span>=<span class="text-[#ce9178]">"p-8 text-center"</span><span class="text-api-teal">></span>
+    <span class="text-api-teal"><h1</span> <span class="text-[#9cdcfe]">class</span>=<span class="text-[#ce9178]">"text-2xl font-bold mb-4"</span><span class="text-api-teal">></span>Vue 3 Counter<span class="text-api-teal"></h1></span>
+    <span class="text-api-teal"><button</span> 
+      <span class="text-[#dcdcaa]">@click</span>=<span class="text-[#ce9178]">"increment"</span>
+      <span class="text-[#9cdcfe]">class</span>=<span class="text-[#ce9178]">"bg-blue-600 text-white px-4 py-2 rounded"</span>
+    <span class="text-api-teal">></span>
+      Count is: {{ count }}
+    <span class="text-api-teal"></button></span>
+  <span class="text-api-teal"></div></span>
+<span class="text-source-purple"></template></span>
+
+<span class="text-source-purple"><script <span class="text-[#9cdcfe]">setup</span>></span>
+<span class="text-[#c586c0]">import</span> { ref, watch } <span class="text-[#c586c0]">from</span> <span class="text-[#ce9178]">'vue'</span>
+
+<span class="text-[#569cd6]">const</span> count = <span class="text-[#dcdcaa]">ref</span>(<span class="text-[#b5cea8]">0</span>)
+
+<span class="text-[#dcdcaa]">watch</span>(count, (<span class="text-[#9cdcfe]">newValue</span>) <span class="text-[#569cd6]">=></span> {
+  <span class="text-[#4ec9b0]">console</span>.<span class="text-[#dcdcaa]">log</span>(<span class="text-[#ce9178]">`count changed: </span>${newValue}<span class="text-[#ce9178]`</span>) }) <span class=" text-[#569cd6]"="">const</span> <span class="text-[#dcdcaa]">increment</span> = () <span class="text-[#569cd6]">=></span> count.value++
+<span class="text-source-purple"></script></span></code></pre>
+</div>
+<!-- Console Output -->
+<div class="h-1/4 bg-[#1e1e1e] border-t border-[#333] flex flex-col">
+<div class="flex items-center px-4 py-2 bg-[#252526] border-b border-[#333]">
+<span class="text-white/60 font-label-md text-label-md uppercase">Console</span>
+</div>
+<div class="flex-1 p-4 font-code-sm text-code-sm text-white/80 overflow-auto code-editor-scrollbar" id="console-output">
+<div class="flex items-start space-x-2 py-1">
+<span class="text-green-400 font-bold">INFO:</span>
+<span>[Vue-Dev-Server] Environment initialized.</span>
+</div>
+<div class="flex items-start space-x-2 py-1">
+<span class="text-on-secondary-container font-bold">LOG:</span>
+<span>count changed: 0</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Preview Area (Right) -->
+<div class="col-span-12 lg:col-span-5 flex flex-col h-full bg-white rounded-xl border border-border-subtle shadow-lg overflow-hidden">
+<div class="flex items-center px-4 py-3 bg-surface-container border-b border-border-subtle">
+<span class="material-symbols-outlined text-primary mr-2">visibility</span>
+<span class="font-headline-sm text-headline-sm text-on-surface">Preview</span>
+</div>
+<div class="flex-1 flex items-center justify-center p-stack-lg bg-[#FDFDFD] relative group">
+<!-- Simulated Interactive UI -->
+<div class="w-full max-w-sm p-8 bg-white rounded-2xl shadow-sm border border-border-subtle text-center transform transition-transform hover:scale-[1.02]">
+<h3 class="font-headline-md text-headline-md text-on-surface mb-6">Vue 3 Counter</h3>
+<div class="relative inline-block mb-8">
+<div class="absolute -inset-4 bg-primary/10 rounded-full blur-xl animate-pulse"></div>
+<div class="relative text-display-lg font-display-lg text-primary" id="display-count">
+                                    0
+                                </div>
+</div>
+<div class="space-y-3">
+<button class="w-full py-3 bg-primary text-on-primary rounded-xl font-bold shadow-md hover:shadow-lg transition-all active:scale-95" id="preview-inc-btn">
+                                    Increment Count
+                                </button>
+<button class="w-full py-3 bg-surface-container-high text-on-surface-variant rounded-xl font-semibold transition-all hover:bg-surface-container-highest" id="preview-reset-btn">
+                                    Reset
+                                </button>
+</div>
+</div>
+<!-- Grid Pattern Overlay -->
+<div class="absolute inset-0 pointer-events-none opacity-[0.03]" style="background-image: radial-gradient(#3525cd 1px, transparent 0); background-size: 24px 24px;"></div>
+</div>
+<!-- Analysis Card -->
+<div class="p-6 bg-surface-container-low border-t border-border-subtle">
+<h4 class="font-semibold text-body-lg mb-3 flex items-center">
+<span class="material-symbols-outlined mr-2 text-api-teal">auto_awesome</span>
+                            Mentorship Insight
+                        </h4>
+<p class="text-on-surface-variant text-body-md leading-relaxed">
+                            You're using <code class="bg-primary/10 px-1 rounded text-primary">ref()</code> and <code class="bg-primary/10 px-1 rounded text-primary">watch()</code> effectively. In a real-world scenario, consider using <code class="bg-primary/10 px-1 rounded text-primary">computed()</code> if your UI depends on transformed state, as it offers better caching performance.
+                        </p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<script>
+        // Micro-interactions for the preview counter
+        let count = 0;
+        const displayCount = document.getElementById('display-count');
+        const incBtn = document.getElementById('preview-inc-btn');
+        const resetBtn = document.getElementById('preview-reset-btn');
+        const consoleOutput = document.getElementById('console-output');
+
+        function appendLog(val) {
+            const entry = document.createElement('div');
+            entry.className = 'flex items-start space-x-2 py-1';
+            const timestamp = new Date().toLocaleTimeString([], {hour12: false, hour: '2-digit', minute: '2-digit', second: '2-digit'});
+            entry.innerHTML = `<span class="text-on-secondary-container font-bold">LOG:</span> <span class="text-white/40 font-code-sm">[${timestamp}]</span> <span>count changed: ${val}</span>`;
+            consoleOutput.appendChild(entry);
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+        }
+
+        incBtn.addEventListener('click', () => {
+            count++;
+            displayCount.textContent = count;
+            // Visual bounce
+            displayCount.classList.add('scale-110');
+            setTimeout(() => displayCount.classList.remove('scale-110'), 100);
+            appendLog(count);
+        });
+
+        resetBtn.addEventListener('click', () => {
+            count = 0;
+            displayCount.textContent = count;
+            appendLog(count);
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', () => {
+            consoleOutput.innerHTML = '<div class="flex items-start space-x-2 py-1"><span class="text-white/40 italic">Console cleared...</span></div>';
+        });
+
+        document.getElementById('run-btn').addEventListener('click', function() {
+            this.innerHTML = '<span class="material-symbols-outlined mr-2 animate-spin">refresh</span>Running...';
+            setTimeout(() => {
+                this.innerHTML = '<span class="material-symbols-outlined mr-2">play_arrow</span>Run';
+                const entry = document.createElement('div');
+                entry.className = 'flex items-start space-x-2 py-1';
+                entry.innerHTML = '<span class="text-green-400 font-bold">INFO:</span> <span class="text-white">Hot Module Replacement (HMR) applied.</span>';
+                consoleOutput.appendChild(entry);
+            }, 800);
+        });
+    </script>
+</body></html>

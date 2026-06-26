@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reset Password | Stack Mentor AI</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#006f66",
+                        "on-tertiary-fixed": "#351000",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "inverse-on-surface": "#f3effc",
+                        "primary": "#3525cd",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container-lowest": "#ffffff",
+                        "surface": "#fcf8ff",
+                        "primary-fixed": "#e2dfff",
+                        "surface-container": "#f0ecf9",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-secondary-fixed": "#00201d",
+                        "on-secondary": "#ffffff",
+                        "outline": "#777587",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcd8e5",
+                        "surface-bright": "#fcf8ff",
+                        "call-chain-blue": "#2563EB",
+                        "code-bg": "#1E1E1E",
+                        "border-subtle": "#E5E7EB",
+                        "secondary": "#006a61",
+                        "surface-variant": "#e4e1ee",
+                        "secondary-fixed": "#89f5e7",
+                        "background": "#fcf8ff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f5f2ff",
+                        "outline-variant": "#c7c4d8",
+                        "secondary-container": "#86f2e4",
+                        "api-teal": "#0D9488",
+                        "tertiary-container": "#a44100",
+                        "primary-container": "#4f46e5",
+                        "surface-gray": "#F9FAFB",
+                        "inverse-surface": "#302f39",
+                        "surface-container-high": "#eae6f4",
+                        "on-surface": "#1b1b24",
+                        "source-purple": "#7C3AED",
+                        "surface-tint": "#4d44e3",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-surface-variant": "#464555",
+                        "error-container": "#ffdad6",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "tertiary": "#7e3000",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "surface-container-highest": "#e4e1ee",
+                        "on-background": "#1b1b24",
+                        "on-tertiary-container": "#ffd2be",
+                        "on-primary-fixed": "#0f0069",
+                        "on-primary-container": "#dad7ff",
+                        "on-primary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "container-max": "1440px",
+                        "margin-mobile": "16px",
+                        "stack-lg": "24px",
+                        "sidebar-width": "260px",
+                        "gutter": "24px",
+                        "margin-desktop": "32px",
+                        "stack-sm": "8px",
+                        "stack-md": "16px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "code-sm": ["JetBrains Mono"],
+                        "headline-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "code-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .shimmer-bg {
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            background-size: 200% 100%;
+            animation: shimmer 3s infinite;
+        }
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+    </style>
+</head>
+<body class="bg-surface-gray font-body-md text-on-background min-h-screen flex flex-col">
+<!-- Top Navigation (Shell suppressed for transactional focus, but using basic logo for brand) -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-center items-center h-16 px-margin-desktop">
+<div class="flex items-center gap-2">
+<span class="text-primary material-symbols-outlined text-3xl">terminal</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">Stack Mentor AI</span>
+</div>
+</header>
+<main class="flex-grow flex items-center justify-center px-margin-mobile py-stack-lg relative overflow-hidden">
+<!-- Subtle Ambient Background Element -->
+<div class="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] rounded-full bg-primary/5 blur-[120px]"></div>
+<div class="absolute -bottom-[20%] -right-[10%] w-[60%] h-[60%] rounded-full bg-secondary/5 blur-[120px]"></div>
+<!-- Reset Card -->
+<section class="w-full max-w-[440px] z-10">
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl p-stack-lg md:p-10 shadow-sm transition-all duration-300 hover:shadow-md">
+<!-- Icon Header -->
+<div class="flex flex-col items-center text-center mb-stack-lg">
+<div class="w-16 h-16 rounded-full bg-primary-fixed flex items-center justify-center mb-stack-md">
+<span class="material-symbols-outlined text-primary text-[32px]">lock_reset</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface mb-2">Reset Your Password</h1>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-[320px]">
+                        Enter your email address and we'll send you a link to reset your password.
+                    </p>
+</div>
+<!-- Reset Form -->
+<form class="space-y-stack-md" id="reset-form" onsubmit="event.preventDefault(); handleResetSubmit();">
+<div>
+<label class="block font-label-md text-label-md text-on-surface-variant mb-1.5 ml-0.5" for="email">Email Address</label>
+<div class="relative group">
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-outline group-focus-within:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">mail</span>
+</div>
+<input class="w-full pl-10 pr-4 py-3 bg-surface rounded-lg border border-outline-variant focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all font-body-md text-body-md placeholder:text-outline-variant" id="email" placeholder="name@company.com" required="" type="email"/>
+</div>
+</div>
+<button class="w-full bg-primary text-on-primary font-label-md text-label-md font-bold py-3.5 rounded-lg flex items-center justify-center gap-2 hover:bg-primary-container active:scale-[0.98] transition-all duration-200 group relative overflow-hidden" id="submit-btn" type="submit">
+<span id="btn-text">Send Reset Link</span>
+<span class="hidden" id="btn-loader">
+<svg class="animate-spin h-5 w-5 text-white" fill="none" viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+<path class="opacity-75" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" fill="currentColor"></path>
+</svg>
+</span>
+</button>
+</form>
+<!-- Footer Actions -->
+<div class="mt-stack-lg pt-stack-lg border-t border-outline-variant flex justify-center">
+<a class="flex items-center gap-2 text-primary font-label-md text-label-md font-bold hover:underline transition-all" href="#">
+<span class="material-symbols-outlined text-[18px]">arrow_back</span>
+                        Back to Login
+                    </a>
+</div>
+</div>
+<!-- Success State (Hidden by default) -->
+<div class="hidden bg-secondary-container text-on-secondary-container border border-secondary p-stack-md rounded-lg mt-stack-md flex gap-3 items-start animate-fade-in" id="success-state">
+<span class="material-symbols-outlined">check_circle</span>
+<div>
+<p class="font-label-md font-bold">Recovery email sent!</p>
+<p class="text-sm opacity-90 mt-0.5">Please check your inbox and follow the instructions to reset your password.</p>
+</div>
+</div>
+<!-- Trust Badge / Secondary Context -->
+<div class="mt-stack-lg flex flex-col items-center gap-stack-sm opacity-60">
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">security</span>
+<span class="font-label-md text-label-md">Secure Encryption</span>
+</div>
+<div class="w-1 h-1 rounded-full bg-outline-variant"></div>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px]">verified_user</span>
+<span class="font-label-md text-label-md">Verified Access</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer Component -->
+<footer class="w-full py-stack-lg px-margin-desktop flex flex-col md:flex-row justify-between items-center gap-gutter border-t border-outline-variant bg-surface-container-lowest">
+<div class="flex items-center gap-2">
+<span class="text-label-md font-label-md font-bold text-on-surface">© 2024 Stack Mentor AI. Engineered for Excellence.</span>
+</div>
+<nav class="flex gap-stack-md">
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Terms of Service</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Security</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors font-label-md text-label-md" href="#">Status</a>
+</nav>
+</footer>
+<script>
+        function handleResetSubmit() {
+            const btn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const btnLoader = document.getElementById('btn-loader');
+            const successState = document.getElementById('success-state');
+            const emailInput = document.getElementById('email');
+
+            // Simulate loading
+            btn.disabled = true;
+            btnText.classList.add('opacity-0');
+            btnLoader.classList.remove('hidden');
+
+            setTimeout(() => {
+                // Mock success
+                btnLoader.classList.add('hidden');
+                btnText.classList.remove('opacity-0');
+                btnText.textContent = 'Link Sent';
+                btn.classList.replace('bg-primary', 'bg-secondary');
+                
+                successState.classList.remove('hidden');
+                successState.classList.add('animate-bounce-subtle');
+                
+                emailInput.value = '';
+                emailInput.disabled = true;
+                emailInput.classList.add('bg-surface-variant/20');
+            }, 1500);
+        }
+
+        // Add micro-interaction styles via script
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fade-in {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fade-in 0.4s ease-out forwards;
+            }
+            @keyframes bounce-subtle {
+                0%, 100% { transform: translateY(0); }
+                50% { transform: translateY(-4px); }
+            }
+            .animate-bounce-subtle {
+                animation: bounce-subtle 2s infinite ease-in-out;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body></html>

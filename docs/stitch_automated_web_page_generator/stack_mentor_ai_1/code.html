@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stack Mentor AI - Dashboard</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter & JetBrains Mono -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e3000",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-container-high": "#eae6f4",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3effc",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#f0ecf9",
+                        "code-bg": "#1E1E1E",
+                        "background": "#fcf8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "surface-gray": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "inverse-surface": "#302f39",
+                        "surface-dim": "#dcd8e5",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "call-chain-blue": "#2563EB",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-highest": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-tertiary-container": "#ffd2be",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "source-purple": "#7C3AED",
+                        "surface-variant": "#e4e1ee",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-secondary-fixed": "#00201d",
+                        "api-teal": "#0D9488",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-background": "#1b1b24",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-surface": "#1b1b24",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "container-max": "1440px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg-mobile": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "code-sm": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "display-lg-mobile": ["24px", {"lineHeight": "32px", "fontWeight": "700"}],
+                        "body-md": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "500"}],
+                        "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code-sm": ["13px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: rgba(195, 192, 255, 0.2);
+            color: #3525cd;
+            font-weight: 600;
+            border-left: 2px solid #3525cd;
+        }
+        .card-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface font-body-md selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+<!-- Shell Layout: Fixed Sidebar -->
+<aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-gray border-r border-border-subtle flex flex-col py-stack-lg z-50">
+<!-- Brand Identity -->
+<div class="px-6 mb-8 flex items-center gap-3">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-xl text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-display-lg text-[20px] leading-tight font-black text-primary">Stack Mentor AI</h1>
+<p class="text-[11px] text-outline uppercase tracking-widest font-semibold">Expert Framework Mentor</p>
+</div>
+</div>
+<!-- Navigation Links -->
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="sidebar-active flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-body-md">Dashboard</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all group" href="#">
+<span class="material-symbols-outlined">api</span>
+<span class="text-body-md">API Explainer</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">code</span>
+<span class="text-body-md">Source Reader</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">account_tree</span>
+<span class="text-body-md">Call Chain Analysis</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">hub</span>
+<span class="text-body-md">Knowledge Graph</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">science</span>
+<span class="text-body-md">AI Lab</span>
+</a>
+<div class="h-px bg-border-subtle my-4 mx-4"></div>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">psychology</span>
+<span class="text-body-md">AI Interviewer</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">school</span>
+<span class="text-body-md">Study Path</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">bookmark</span>
+<span class="text-body-md">Bookmarks</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="text-body-md">History</span>
+</a>
+<a class="text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface flex items-center gap-3 px-4 py-3 rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-body-md">Settings</span>
+</a>
+</nav>
+<!-- Sidebar Footer -->
+<div class="px-4 mt-auto">
+<button class="w-full bg-primary-container text-on-primary-container py-3 px-4 rounded-xl font-semibold text-body-md mb-6 hover:opacity-90 active:scale-95 transition-all flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[18px]">stars</span>
+                Get Pro Access
+            </button>
+<div class="flex items-center gap-3 p-3 bg-surface-container rounded-xl">
+<img class="w-10 h-10 rounded-full object-cover" data-alt="A close-up portrait of a professional developer in a bright, modern office setting. The lighting is clean and professional with a soft blur in the background. The aesthetic is modern-corporate with neutral tones and a focus on high-quality skin textures and professional attire." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZDGrHmaybpMToeBw7ipXmxqdyCGdt2x54cg6HhW_09sr830sAjD79n-b16I9_j1O7JCyTBPgPLSlSEXfd7qyc6yUzyK6_-JYPPuxTM2IVZG72-g_Ewk91h1CO7xRc-W33jJR9G-yKXFMZUhElrI__NbIA-VBZ7SfLLqfTFmMHleVXrSKZYyEVAhvW_4pS6sGR1jQeWp9I55UKALCMl6Ggqc-UixP60zy3TOK_G0EfSTecrkSfybSZEXz8XN2RYmXn0O0j1URyRR8"/>
+<div class="flex-1 overflow-hidden">
+<p class="text-label-md font-bold truncate">John Doe</p>
+<p class="text-[10px] text-primary font-bold uppercase">Pro Member</p>
+</div>
+<button class="text-on-surface-variant">
+<span class="material-symbols-outlined">logout</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-[260px] min-h-screen">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 w-full h-16 bg-surface/80 backdrop-blur-md border-b border-border-subtle flex justify-between items-center px-gutter">
+<!-- Search Bar -->
+<div class="flex-1 max-w-xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all text-body-md" placeholder="搜索文档、API、源码或问题..." type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 flex gap-1">
+<kbd class="px-1.5 py-0.5 rounded border border-border-subtle bg-white text-[10px] font-bold text-outline">⌘</kbd>
+<kbd class="px-1.5 py-0.5 rounded border border-border-subtle bg-white text-[10px] font-bold text-outline">K</kbd>
+</div>
+</div>
+</div>
+<!-- Trailing Actions -->
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-8 mr-4">
+<a class="text-on-surface-variant hover:text-primary font-medium transition-colors" href="#">Docs</a>
+<a class="text-on-surface-variant hover:text-primary font-medium transition-colors" href="#">Vite</a>
+<a class="text-on-surface-variant hover:text-primary font-medium transition-colors" href="#">Vue3</a>
+<a class="text-on-surface-variant hover:text-primary font-medium transition-colors" href="#">Discord</a>
+</nav>
+<div class="flex items-center gap-2 border-l border-border-subtle pl-6">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full border-2 border-surface"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">account_circle</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Dashboard Canvas -->
+<div class="px-gutter py-8 max-w-[1400px] mx-auto">
+<!-- Welcome Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between mb-10 gap-4">
+<div>
+<h2 class="font-display-lg text-display-lg text-on-background">欢迎回来，John! 👋</h2>
+<p class="text-on-surface-variant font-body-lg mt-1">今天想探索 Vue3 的哪个知识点？</p>
+</div>
+<div class="flex items-center gap-2 text-on-surface-variant bg-surface-container p-3 rounded-xl border border-border-subtle">
+<span class="material-symbols-outlined text-primary">lightbulb</span>
+<span class="text-label-md">小建议：尝试使用 API 解释器分析 Composition API 的性能差异。</span>
+</div>
+</div>
+<!-- Top Action Bento Grid -->
+<div class="grid grid-cols-2 md:grid-cols-5 gap-stack-md mb-12">
+<!-- API Explainer Card -->
+<div class="group bg-white p-6 rounded-2xl border border-border-subtle card-hover-effect transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-api-teal/10 flex items-center justify-center text-api-teal mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">api</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-1">API 解释器</h3>
+<p class="text-label-md text-on-surface-variant">阐释 Vue3 API 的原理与用法</p>
+</div>
+<!-- Source Reader Card -->
+<div class="group bg-white p-6 rounded-2xl border border-border-subtle card-hover-effect transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-source-purple/10 flex items-center justify-center text-source-purple mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">code</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-1">源码阅读助手</h3>
+<p class="text-label-md text-on-surface-variant">深入理解 Vue3 源码实现机制</p>
+</div>
+<!-- Call Chain Card -->
+<div class="group bg-white p-6 rounded-2xl border border-border-subtle card-hover-effect transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-call-chain-blue/10 flex items-center justify-center text-call-chain-blue mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">account_tree</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-1">调用链分析</h3>
+<p class="text-label-md text-on-surface-variant">可视化追踪代码调用路径</p>
+</div>
+<!-- Knowledge Graph Card -->
+<div class="group bg-white p-6 rounded-2xl border border-border-subtle card-hover-effect transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-graph-indigo/10 flex items-center justify-center text-graph-indigo mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">hub</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-1">知识图谱</h3>
+<p class="text-label-md text-on-surface-variant">探索知识关系与核心概念网格</p>
+</div>
+<!-- AI Lab Card -->
+<div class="group bg-white p-6 rounded-2xl border border-border-subtle card-hover-effect transition-all cursor-pointer">
+<div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">science</span>
+</div>
+<h3 class="font-headline-sm text-on-surface mb-1">AI 实验室</h3>
+<p class="text-label-md text-on-surface-variant">进行代码片段、验证想法与实验</p>
+</div>
+</div>
+<!-- Two Column Layout: Activity & Progress -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-stack-lg mb-12">
+<!-- Left: Recent Activity -->
+<div class="lg:col-span-7 bg-white rounded-2xl border border-border-subtle overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center bg-surface-gray/50">
+<h3 class="font-headline-sm text-on-surface">最近使用</h3>
+<button class="text-primary text-label-md font-bold hover:underline">查看全部</button>
+</div>
+<div class="divide-y divide-border-subtle">
+<div class="p-4 hover:bg-surface-container-lowest transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-api-teal/10 rounded-lg text-api-teal">
+<span class="material-symbols-outlined text-[20px]">watch</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">watch 的实现原理</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="bg-api-teal/5 text-api-teal text-[10px] px-1.5 py-0.5 rounded font-bold border border-api-teal/10 uppercase">API 解释器</span>
+<span class="text-[11px] text-outline">10 分钟前</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div class="p-4 hover:bg-surface-container-lowest transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-source-purple/10 rounded-lg text-source-purple">
+<span class="material-symbols-outlined text-[20px]">code</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">ref 源码分析</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="bg-source-purple/5 text-source-purple text-[10px] px-1.5 py-0.5 rounded font-bold border border-source-purple/10 uppercase">源码阅读</span>
+<span class="text-[11px] text-outline">2 小时前</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div class="p-4 hover:bg-surface-container-lowest transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-call-chain-blue/10 rounded-lg text-call-chain-blue">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">count.value++ 调用链分析</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="bg-call-chain-blue/5 text-call-chain-blue text-[10px] px-1.5 py-0.5 rounded font-bold border border-call-chain-blue/10 uppercase">调用链分析</span>
+<span class="text-[11px] text-outline">昨天</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+<div class="p-4 hover:bg-surface-container-lowest transition-colors flex items-center justify-between group">
+<div class="flex items-center gap-4">
+<div class="p-2 bg-graph-indigo/10 rounded-lg text-graph-indigo">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div>
+<p class="font-bold text-on-surface">响应式系统原理</p>
+<div class="flex items-center gap-2 mt-0.5">
+<span class="bg-graph-indigo/5 text-graph-indigo text-[10px] px-1.5 py-0.5 rounded font-bold border border-graph-indigo/10 uppercase">知识图谱</span>
+<span class="text-[11px] text-outline">2 天前</span>
+</div>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline opacity-0 group-hover:opacity-100 transition-opacity">chevron_right</span>
+</div>
+</div>
+</div>
+<!-- Right: Learning Progress -->
+<div class="lg:col-span-5 bg-white rounded-2xl border border-border-subtle p-6 flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-on-surface">学习进度</h3>
+<span class="bg-primary/10 text-primary text-[11px] px-2 py-0.5 rounded-full font-bold">进阶计划</span>
+</div>
+<div class="mb-8">
+<div class="flex justify-between items-end mb-2">
+<span class="font-bold text-on-surface">Vue3 核心原理</span>
+<span class="text-display-lg-mobile font-black text-primary">62%</span>
+</div>
+<div class="h-3 w-full bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 62%;"></div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4 flex-1">
+<div class="bg-surface-container-low p-4 rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-primary bg-primary/10 p-2 rounded-lg">history_edu</span>
+<div>
+<p class="text-[11px] text-outline font-bold">已学习</p>
+<p class="text-headline-sm text-on-surface">24 <span class="text-[12px] font-normal text-on-surface-variant">天</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary bg-secondary/10 p-2 rounded-lg">school</span>
+<div>
+<p class="text-[11px] text-outline font-bold">知识掌握</p>
+<p class="text-headline-sm text-on-surface">156 <span class="text-[12px] font-normal text-on-surface-variant">个</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-api-teal bg-api-teal/10 p-2 rounded-lg">science</span>
+<div>
+<p class="text-[11px] text-outline font-bold">完成实验</p>
+<p class="text-headline-sm text-on-surface">12 <span class="text-[12px] font-normal text-on-surface-variant">个</span></p>
+</div>
+</div>
+<div class="bg-surface-container-low p-4 rounded-xl border border-border-subtle flex items-center gap-3">
+<span class="material-symbols-outlined text-error bg-error/10 p-2 rounded-lg">quiz</span>
+<div>
+<p class="text-[11px] text-outline font-bold">解决问题</p>
+<p class="text-headline-sm text-on-surface">89 <span class="text-[12px] font-normal text-on-surface-variant">个</span></p>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full border border-border-subtle py-3 rounded-xl font-bold text-on-surface-variant hover:bg-surface-container transition-all flex items-center justify-center gap-2">
+                        查看全部进度
+                        <span class="material-symbols-outlined text-[18px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Bottom Row Bento Components -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-stack-lg">
+<!-- Daily Question Card -->
+<div class="relative rounded-2xl overflow-hidden bg-primary-container min-h-[220px] p-8 flex flex-col justify-between group">
+
+<div class="relative z-10">
+<span class="text-[11px] font-bold text-on-primary-container opacity-80 uppercase tracking-widest">每日一问</span>
+<h3 class="font-display-lg text-white mt-2 leading-snug">Vue3 中 watch 和 watchEffect 有什么区别？</h3>
+</div>
+<div class="relative z-10 mt-6">
+<button class="bg-white text-primary px-8 py-3 rounded-xl font-bold hover:scale-105 active:scale-95 transition-transform">开始学习</button>
+</div>
+</div>
+<!-- Recommended Reading -->
+<div class="bg-white rounded-2xl border border-border-subtle p-8">
+<h3 class="font-headline-sm text-on-surface mb-6">推荐阅读</h3>
+<div class="space-y-4">
+<div class="flex items-center justify-between group cursor-pointer border-b border-border-subtle pb-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors">深入理解 Vue3 响应式系统</p>
+<p class="text-[11px] text-outline">阅读时长：12 分钟</p>
+</div>
+</div>
+<button class="text-primary font-bold text-label-md">阅读</button>
+</div>
+<div class="flex items-center justify-between group cursor-pointer border-b border-border-subtle pb-4">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors">Vue3 编译器核心原理解析</p>
+<p class="text-[11px] text-outline">阅读时长：15 分钟</p>
+</div>
+</div>
+<button class="text-primary font-bold text-label-md">阅读</button>
+</div>
+<div class="flex items-center justify-between group cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-lg bg-surface-container flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">menu_book</span>
+</div>
+<div>
+<p class="font-bold text-on-surface group-hover:text-primary transition-colors">Virtual DOM 的实现与优化</p>
+<p class="text-[11px] text-outline">阅读时长：10 分钟</p>
+</div>
+</div>
+<button class="text-primary font-bold text-label-md">阅读</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Floating Action Button (Contextual Suppression applies, only showing if active) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-white rounded-full shadow-lg flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">add</span>
+</button>
+</main>
+<!-- Custom Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Placeholder for future interactivity
+            console.log('Stack Mentor AI Dashboard Initialized');
+            
+            // Add subtle parallax or hover effects via JS if needed
+            const cards = document.querySelectorAll('.card-hover-effect');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    // Logic for card interaction
+                });
+            });
+        });
+    </script>
+</body></html>

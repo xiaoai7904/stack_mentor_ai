@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stack Mentor AI - API Explainer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e3000",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-container-high": "#eae6f4",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3effc",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#f0ecf9",
+                        "code-bg": "#1E1E1E",
+                        "background": "#fcf8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "surface-gray": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "inverse-surface": "#302f39",
+                        "surface-dim": "#dcd8e5",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "call-chain-blue": "#2563EB",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-highest": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-tertiary-container": "#ffd2be",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "source-purple": "#7C3AED",
+                        "surface-variant": "#e4e1ee",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-secondary-fixed": "#00201d",
+                        "api-teal": "#0D9488",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-background": "#1b1b24",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-surface": "#1b1b24",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "container-max": "1440px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "label-md": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "code-sm": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-tab {
+            font-variation-settings: 'FILL' 1;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D1D5DB;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<div class="flex h-screen overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-gray border-r border-border-subtle flex flex-col py-stack-lg z-50">
+<div class="px-gutter mb-8">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+</div>
+<div>
+<h1 class="font-display-lg text-[20px] font-bold text-primary leading-tight">Stack Mentor AI</h1>
+<p class="text-[11px] text-on-surface-variant tracking-wider uppercase">Expert Framework Mentor</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<!-- API Explainer (Active) -->
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg bg-primary-fixed-dim/20 text-primary font-semibold border-l-2 border-primary transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">api</span>
+<span class="font-body-md">API Explainer</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">code</span>
+<span class="font-body-md">Source Reader</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="font-body-md">Call Chain Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+<span class="font-body-md">Knowledge Graph</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">science</span>
+<span class="font-body-md">AI Lab</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">psychology</span>
+<span class="font-body-md">AI Interviewer</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">school</span>
+<span class="font-body-md">Study Path</span>
+</a>
+<div class="pt-4 pb-2">
+<p class="px-4 text-[11px] font-bold text-on-surface-variant/60 uppercase tracking-widest">Library</p>
+</div>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">bookmark</span>
+<span class="font-body-md">Bookmarks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">history</span>
+<span class="font-body-md">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span class="font-body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto px-4 space-y-4">
+<div class="bg-primary-container p-4 rounded-xl text-on-primary-container relative overflow-hidden group">
+<div class="relative z-10">
+<p class="text-label-md font-bold mb-1">Get Pro Access</p>
+<p class="text-[11px] opacity-80 mb-3">Unlock advanced AI analysis and unlimited knowledge graphs.</p>
+<button class="w-full py-1.5 bg-white text-primary text-label-md font-bold rounded shadow-sm hover:bg-opacity-90 transition-all">Upgrade Now</button>
+</div>
+<span class="material-symbols-outlined absolute -right-4 -bottom-4 text-[80px] opacity-10 group-hover:scale-110 transition-transform duration-500">stars</span>
+</div>
+<div class="flex items-center gap-3 px-4 py-3 border-t border-border-subtle">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional close-up studio portrait of a modern software engineer in their early 30s. The lighting is soft and cinematic, coming from the side to create depth. The background is a clean, out-of-focus tech office with soft blue and white ambient lighting. The person has a friendly, knowledgeable expression, representing the 'John Doe' user profile." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAmyo4agg3t_ZbDHZQqq5nyvFYE4LRz1STdZBCTCQGcl2vPrwIBTkDfp6kV67GsR9-MnzYzYJOK-QCEisKRRZTIpqzCb51z1qS3ZNt2I3k8L6zttrm5_g0OfOyy6An5SeeDikz7eJ7YvmSKDl88LQzBzHMSZzSsBZ7blCNCG258U1603VwBC87lOUKRH-WydlY7u8eVOCY-LAX7pFWka2qOvbhlxDKwKmNB0d9XyQEhrytcS58uNiglrDrwZYKt30pSSR9l2FDvv94"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-bold truncate">John Doe</p>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[12px] text-tertiary" style="font-variation-settings: 'FILL' 1;">stars</span>
+<p class="text-[11px] text-on-surface-variant">Pro Member</p>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-sidebar-width flex-1 flex flex-col h-full bg-background relative overflow-hidden">
+<!-- TopAppBar -->
+<header class="sticky top-0 z-40 bg-surface/80 backdrop-blur-md border-b border-border-subtle h-16 flex items-center justify-between px-gutter">
+<div class="flex items-center gap-8">
+<h2 class="font-headline-sm text-primary">API Explainer</h2>
+<nav class="hidden lg:flex items-center gap-6">
+<a class="text-on-surface-variant hover:text-primary font-medium text-body-md" href="#">Docs</a>
+<a class="text-on-surface-variant hover:text-primary font-medium text-body-md" href="#">Vite</a>
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Vue3</a>
+<a class="text-on-surface-variant hover:text-primary font-medium text-body-md" href="#">Discord</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant group-focus-within:text-primary">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border-transparent focus:border-primary focus:ring-0 rounded-full w-64 text-body-md transition-all" placeholder="Search API (e.g. watch, ref...)" type="text"/>
+<div class="absolute right-3 top-1/2 -translate-y-1/2 bg-surface-container px-1.5 py-0.5 rounded text-[10px] font-mono text-on-surface-variant border border-border-subtle">⌘ K</div>
+</div>
+<div class="flex items-center gap-1 border-l border-border-subtle ml-2 pl-4">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors relative">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Scrollable Content Canvas -->
+<div class="flex-1 overflow-y-auto p-gutter scroll-smooth">
+<!-- Search Hero -->
+<section class="max-w-4xl mx-auto mb-12 text-center py-8">
+<h1 class="font-display-lg text-primary mb-4">What can I explain today?</h1>
+<p class="text-on-surface-variant text-body-lg mb-8">Enter any Vue3 API or concept, and I'll break down the internals for you.</p>
+<div class="flex max-w-2xl mx-auto gap-2 bg-white p-2 rounded-xl shadow-sm border border-border-subtle">
+<input class="flex-1 px-4 py-3 border-none focus:ring-0 text-headline-sm font-semibold text-primary" placeholder="e.g. reactive, computed, effect..." type="text" value="watch"/>
+<button class="px-8 py-3 bg-primary text-on-primary font-bold rounded-lg hover:brightness-110 active:scale-95 transition-all">Analyze</button>
+</div>
+<div class="mt-4 flex items-center justify-center gap-4 text-label-md">
+<span class="text-on-surface-variant">Popular:</span>
+<button class="px-3 py-1 bg-surface-container hover:bg-primary-fixed-dim/20 rounded transition-colors text-on-surface">watchEffect</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-primary-fixed-dim/20 rounded transition-colors text-on-surface">computed</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-primary-fixed-dim/20 rounded transition-colors text-on-surface">reactive</button>
+<button class="px-3 py-1 bg-surface-container hover:bg-primary-fixed-dim/20 rounded transition-colors text-on-surface">toRef</button>
+</div>
+</section>
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-8 max-w-[1400px] mx-auto">
+<!-- Left Column: Explanation -->
+<div class="xl:col-span-8 space-y-8">
+<!-- Core Definition -->
+<div class="bg-white rounded-2xl border border-border-subtle shadow-sm overflow-hidden">
+<div class="px-8 py-6 border-b border-border-subtle flex items-center justify-between">
+<div class="flex items-center gap-4">
+<h2 class="font-display-lg text-[32px] text-primary">watch</h2>
+<div class="flex bg-surface-container rounded-lg p-1">
+<button class="px-4 py-1.5 text-label-md rounded-md hover:bg-white transition-all">Junior</button>
+<button class="px-4 py-1.5 text-label-md bg-white text-primary font-bold rounded-md shadow-sm">Middle</button>
+<button class="px-4 py-1.5 text-label-md rounded-md hover:bg-white transition-all">Senior</button>
+</div>
+</div>
+<div class="flex gap-2">
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-primary">bookmark</span></button>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors"><span class="material-symbols-outlined text-primary">share</span></button>
+</div>
+</div>
+<div class="p-8 space-y-8">
+<div>
+<h3 class="text-headline-sm text-on-background mb-3 flex items-center gap-2">
+<span class="material-symbols-outlined text-api-teal">subject</span>
+                                        Overview
+                                    </h3>
+<p class="text-body-lg text-on-surface-variant leading-relaxed">
+<code class="px-1.5 py-0.5 bg-surface-container rounded text-primary font-code-sm">watch</code> is a function used to observe reactive changes in Vue 3. It can monitor <code class="text-code-sm font-semibold">ref</code>, <code class="text-code-sm font-semibold">reactive</code> objects, or a <code class="text-code-sm font-semibold">getter</code> function, and execute a callback function when the data changes.
+                                    </p>
+</div>
+<div>
+<h3 class="text-headline-sm text-on-background mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-source-purple">code</span>
+                                        Core Usage
+                                    </h3>
+<div class="bg-code-bg rounded-xl p-6 font-code-sm relative group">
+<div class="absolute right-4 top-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-[11px] text-white/40 uppercase">TypeScript</span>
+<button class="text-white/60 hover:text-white"><span class="material-symbols-outlined text-[18px]">content_copy</span></button>
+</div>
+<pre class="text-white leading-relaxed"><span class="text-source-purple">watch</span>(source, (newValue, oldValue, onCleanup) =&gt; {
+  <span class="text-api-teal">// callback logic</span>
+}, {
+  immediate: <span class="text-tertiary">false</span>,
+  deep: <span class="text-tertiary">false</span>,
+  flush: <span class="text-primary-fixed-dim">'pre'</span>
+})</pre>
+</div>
+</div>
+</div>
+</div>
+<!-- Technical Deep Dive Cards (Bento Style) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="bg-white p-6 rounded-2xl border border-border-subtle hover:shadow-md transition-shadow">
+<div class="w-10 h-10 bg-secondary-container text-on-secondary-container rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">psychology</span>
+</div>
+<h4 class="font-bold text-body-lg mb-2">Mental Model</h4>
+<p class="text-body-md text-on-surface-variant">Think of <code class="text-primary">watch</code> as a subscriber to a data stream. It keeps a record of the "old" value and compares it with the "new" one to decide if a reaction is needed.</p>
+</div>
+<div class="bg-white p-6 rounded-2xl border border-border-subtle hover:shadow-md transition-shadow">
+<div class="w-10 h-10 bg-tertiary-container text-on-tertiary-container rounded-lg flex items-center justify-center mb-4">
+<span class="material-symbols-outlined">warning</span>
+</div>
+<h4 class="font-bold text-body-lg mb-2">Common Pitfalls</h4>
+<p class="text-body-md text-on-surface-variant">Avoid deep watching large objects as it causes heavy performance overhead. Always clean up side effects in the <code class="text-tertiary">onCleanup</code> hook.</p>
+</div>
+</div>
+</div>
+<!-- Right Column: System Insights -->
+<div class="xl:col-span-4 space-y-6">
+<!-- Internal Workflow -->
+<div class="bg-white rounded-2xl border border-border-subtle shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle bg-surface-gray">
+<h3 class="font-bold text-body-lg flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-[20px]">account_tree</span>
+                                    Principle Analysis
+                                </h3>
+</div>
+<div class="p-6">
+<div class="relative flex flex-col items-center gap-4 py-4">
+<div class="w-full py-3 px-4 bg-primary-container text-on-primary-container text-center rounded-lg font-bold text-label-md">
+                                        Data Change Detected
+                                    </div>
+<div class="h-6 w-0.5 bg-border-subtle"></div>
+<div class="w-full py-3 px-4 border-2 border-dashed border-primary text-primary text-center rounded-lg font-bold text-label-md">
+                                        Trigger Dependency
+                                    </div>
+<div class="h-6 w-0.5 bg-border-subtle"></div>
+<div class="w-full py-3 px-4 bg-secondary text-on-secondary text-center rounded-lg font-bold text-label-md">
+                                        Scheduler Execution
+                                    </div>
+<div class="h-6 w-0.5 bg-border-subtle"></div>
+<div class="w-full py-3 px-4 bg-tertiary text-on-tertiary text-center rounded-lg font-bold text-label-md">
+                                        Callback Invocation
+                                    </div>
+<!-- Background Pattern -->
+<div class="absolute inset-0 opacity-5 pointer-events-none overflow-hidden">
+<svg height="100%" width="100%"><pattern height="20" id="dots" patternunits="userSpaceOnUse" width="20" x="0" y="0"><circle cx="2" cy="2" fill="currentColor" r="1"></circle></pattern><rect fill="url(#dots)" height="100%" width="100%"></rect></svg>
+</div>
+</div>
+<p class="text-[12px] text-on-surface-variant mt-4 text-center leading-relaxed">
+                                    The reactivity system captures dependencies during the first run and notifies the observer on updates via the scheduler.
+                                </p>
+</div>
+</div>
+<!-- Source Files -->
+<div class="bg-white rounded-2xl border border-border-subtle shadow-sm p-6">
+<h3 class="font-bold text-body-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-source-purple text-[20px]">folder_open</span>
+                                Source Code Location
+                            </h3>
+<div class="space-y-3">
+<a class="group block p-3 bg-surface-gray hover:bg-surface-container transition-all rounded-xl border border-transparent hover:border-primary/20" href="#">
+<p class="text-label-md text-on-surface-variant mb-1">Core Logic</p>
+<div class="flex items-center justify-between">
+<code class="text-[12px] font-code-sm text-primary">packages/runtime-core/src/apiWatch.ts</code>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">open_in_new</span>
+</div>
+</a>
+<a class="group block p-3 bg-surface-gray hover:bg-surface-container transition-all rounded-xl border border-transparent hover:border-primary/20" href="#">
+<p class="text-label-md text-on-surface-variant mb-1">Type Definitions</p>
+<div class="flex items-center justify-between">
+<code class="text-[12px] font-code-sm text-primary">packages/runtime-core/types/watch.d.ts</code>
+<span class="material-symbols-outlined text-[16px] text-on-surface-variant opacity-0 group-hover:opacity-100 transition-opacity">open_in_new</span>
+</div>
+</a>
+</div>
+</div>
+<!-- Related APIs -->
+<div class="bg-white rounded-2xl border border-border-subtle shadow-sm p-6">
+<h3 class="font-bold text-body-lg mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-api-teal text-[20px]">link</span>
+                                Related APIs
+                            </h3>
+<div class="grid grid-cols-1 gap-2">
+<button class="flex items-center justify-between p-2 rounded-lg hover:bg-surface-container text-left transition-all">
+<span class="text-body-md font-medium">watchEffect</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-2 rounded-lg hover:bg-surface-container text-left transition-all">
+<span class="text-body-md font-medium">watchSyncEffect</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-2 rounded-lg hover:bg-surface-container text-left transition-all">
+<span class="text-body-md font-medium">watchPostEffect</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">chevron_right</span>
+</button>
+<button class="flex items-center justify-between p-2 rounded-lg hover:bg-surface-container text-left transition-all">
+<span class="text-body-md font-medium">onWatcherCleanup</span>
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Spacer -->
+<div class="h-20"></div>
+</div>
+<!-- Floating Action Button (FAB) - Contextual to "AI Assistant" -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-primary text-on-primary rounded-full shadow-xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50 group">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<div class="absolute right-16 px-4 py-2 bg-inverse-surface text-inverse-on-surface text-label-md rounded-lg opacity-0 group-hover:opacity-100 translate-x-4 group-hover:translate-x-0 transition-all pointer-events-none whitespace-nowrap">
+                    Ask Follow-up Question
+                </div>
+</button>
+</main>
+</div>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple search shortcut handler
+        document.addEventListener('keydown', (e) => {
+            if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+                e.preventDefault();
+                document.querySelector('input[type="text"]').focus();
+            }
+        });
+
+        // Hover effect for bento cards
+        const bentoCards = document.querySelectorAll('.hover\\:shadow-md');
+        bentoCards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-2px)';
+            });
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

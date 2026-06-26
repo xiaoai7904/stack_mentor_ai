@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Stack Mentor AI - Call Chain Analysis</title>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-active {
+            background-color: rgba(195, 192, 255, 0.2); /* bg-primary-fixed-dim/20 */
+            color: #3525cd; /* text-primary */
+            font-weight: 600;
+            border-left-width: 2px;
+            border-color: #3525cd; /* border-primary */
+        }
+        .call-chain-line {
+            background-image: linear-gradient(to bottom, #3525cd 50%, transparent 50%);
+            background-size: 2px 8px;
+            background-repeat: repeat-y;
+        }
+        .flow-node-glow {
+            box-shadow: 0 0 15px -3px rgba(79, 70, 229, 0.2);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary": "#7e3000",
+                        "on-secondary-container": "#006f66",
+                        "surface-container-low": "#f5f2ff",
+                        "surface-container-high": "#eae6f4",
+                        "on-error-container": "#93000a",
+                        "inverse-on-surface": "#f3effc",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "surface-container": "#f0ecf9",
+                        "code-bg": "#1E1E1E",
+                        "background": "#fcf8ff",
+                        "error-container": "#ffdad6",
+                        "surface": "#fcf8ff",
+                        "surface-gray": "#F9FAFB",
+                        "border-subtle": "#E5E7EB",
+                        "inverse-surface": "#302f39",
+                        "surface-dim": "#dcd8e5",
+                        "error": "#ba1a1a",
+                        "primary": "#3525cd",
+                        "secondary-fixed-dim": "#6bd8cb",
+                        "call-chain-blue": "#2563EB",
+                        "outline": "#777587",
+                        "on-tertiary-fixed-variant": "#7b2f00",
+                        "tertiary-container": "#a44100",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "surface-container-highest": "#e4e1ee",
+                        "secondary-container": "#86f2e4",
+                        "primary-container": "#4f46e5",
+                        "tertiary-fixed-dim": "#ffb695",
+                        "on-tertiary-container": "#ffd2be",
+                        "inverse-primary": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "source-purple": "#7C3AED",
+                        "surface-variant": "#e4e1ee",
+                        "graph-indigo": "#4F46E5",
+                        "tertiary-fixed": "#ffdbcc",
+                        "on-secondary-fixed": "#00201d",
+                        "api-teal": "#0D9488",
+                        "surface-bright": "#fcf8ff",
+                        "on-tertiary-fixed": "#351000",
+                        "on-background": "#1b1b24",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary": "#006a61",
+                        "surface-tint": "#4d44e3",
+                        "on-secondary": "#ffffff",
+                        "on-primary": "#ffffff",
+                        "on-surface-variant": "#464555",
+                        "primary-fixed": "#e2dfff",
+                        "on-primary-fixed": "#0f0069",
+                        "on-secondary-fixed-variant": "#005049",
+                        "on-surface": "#1b1b24",
+                        "on-primary-container": "#dad7ff",
+                        "secondary-fixed": "#89f5e7"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sidebar-width": "260px",
+                        "container-max": "1440px",
+                        "stack-lg": "24px",
+                        "stack-sm": "8px",
+                        "gutter": "24px",
+                        "stack-md": "16px",
+                        "margin-mobile": "16px",
+                        "margin-desktop": "32px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter", "sans-serif"],
+                        "body-md": ["Inter", "sans-serif"],
+                        "headline-sm": ["Inter", "sans-serif"],
+                        "code-sm": ["JetBrains Mono", "monospace"]
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-background text-on-surface font-body-md min-h-screen flex">
+<!-- SideNavBar (Source of Truth Shell) -->
+<aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-gray border-r border-border-subtle flex flex-col py-stack-lg z-50">
+<div class="px-6 mb-10">
+<h1 class="font-display-lg text-[24px] font-bold text-primary tracking-tight">Stack Mentor AI</h1>
+<p class="text-on-surface-variant text-[12px] mt-1 uppercase tracking-wider font-semibold opacity-70">Expert Framework Mentor</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1 overflow-y-auto px-2">
+<!-- Navigation Items Mapping -->
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">dashboard</span>
+<span class="text-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">api</span>
+<span class="text-body-md">API Explainer</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">code</span>
+<span class="text-body-md">Source Reader</span>
+</a>
+<!-- ACTIVE TAB: Call Chain Analysis -->
+<a class="flex items-center gap-3 px-4 py-3 sidebar-active transition-colors duration-200" href="#">
+<span class="material-symbols-outlined text-[20px]">account_tree</span>
+<span class="text-body-md">Call Chain Analysis</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">hub</span>
+<span class="text-body-md">Knowledge Graph</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">science</span>
+<span class="text-body-md">AI Lab</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">psychology</span>
+<span class="text-body-md">AI Interviewer</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">school</span>
+<span class="text-body-md">Study Path</span>
+</a>
+<div class="mt-6 pt-6 border-t border-border-subtle mx-4"></div>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">bookmark</span>
+<span class="text-body-md">Bookmarks</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">history</span>
+<span class="text-body-md">History</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:bg-surface-container-high transition-colors duration-200 group" href="#">
+<span class="material-symbols-outlined text-[20px] group-hover:text-primary">settings</span>
+<span class="text-body-md">Settings</span>
+</a>
+</nav>
+<div class="px-4 mt-auto">
+<div class="bg-primary/5 rounded-xl p-4 border border-primary/10">
+<div class="flex items-center gap-3 mb-3">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="text-label-md font-bold text-primary">PRO MEMBER</span>
+</div>
+<button class="w-full bg-primary text-white py-2 rounded-lg text-body-md font-semibold hover:opacity-90 transition-opacity">Get Pro Access</button>
+</div>
+<div class="flex items-center gap-3 mt-6 p-2">
+<div class="w-10 h-10 rounded-full overflow-hidden bg-surface-container-highest flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer for a tech profile. The person has a friendly, knowledgeable expression. Soft studio lighting, neutral high-key background. Minimalist and corporate style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhlrOS--ejsWDBpn7Zu3FvLP0stAAjUKsYjwPMuWnwMd9qU_rXfTwPAqcG3--awAL7Oe3kR19-Pyc8bKZxpKhYdqRgyjTV8MYKQxmTMYpF-SYXt5X84AzwHCqn7Igv6wvzbJL93ntsxj4pAYZzXsaqODCU-_uAQrfjcNzwSCYzfHPWjhNoSv_K4IAAug5ur9mMYF2Xh17inSSWScqqSacti5BMCNFlUkLUhufXPrGxluE41jsbS-dGAnksc8Xw-PScj40MDvzJ4yc"/>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-body-md font-bold text-on-surface truncate">John Doe</p>
+<p class="text-[12px] text-on-surface-variant truncate">john.doe@techstack.ai</p>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">more_vert</span>
+</div>
+</div>
+</aside>
+<!-- Main Content Stage -->
+<main class="ml-sidebar-width flex-1 flex flex-col h-screen overflow-hidden">
+<!-- Header -->
+<header class="h-16 flex items-center justify-between px-gutter border-b border-border-subtle bg-white/80 backdrop-blur-md sticky top-0 z-40">
+<div class="flex items-center gap-4">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">调用链分析</h2>
+<div class="flex items-center gap-2 text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="text-body-md">Vue3 Reactive System</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<input class="pl-10 pr-4 py-1.5 bg-surface-gray border border-border-subtle rounded-full text-body-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary w-64" placeholder="Search components..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[18px] text-on-surface-variant">search</span>
+</div>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container-low rounded-full transition-all">
+<span class="material-symbols-outlined">help_outline</span>
+</button>
+</div>
+</header>
+<!-- Content Area Split -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Visualization Canvas -->
+<div class="flex-1 overflow-y-auto bg-surface-gray p-8 flex flex-col items-center">
+<!-- Input Box -->
+<div class="w-full max-w-4xl mb-12">
+<div class="bg-white rounded-xl shadow-sm border border-border-subtle p-6">
+<label class="block text-body-md font-semibold text-on-surface mb-3">输入代码片段或场景，AI 将分析代码的完整调用链路</label>
+<div class="flex gap-3">
+<div class="flex-1 relative">
+<textarea class="w-full bg-surface-gray border-border-subtle rounded-lg px-4 py-3 text-code-sm font-mono focus:ring-primary focus:border-primary resize-none" placeholder="例如: count.value++ 或 ref(0).value = 1" rows="1"></textarea>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-[12px] border border-border-subtle px-1.5 rounded">⌘ K</span>
+</div>
+<button class="px-6 bg-primary text-white font-semibold rounded-lg hover:bg-primary-container transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+                                分析
+                            </button>
+</div>
+<div class="mt-4 flex flex-wrap gap-2">
+<span class="text-[12px] text-on-surface-variant mr-2">示例:</span>
+<button class="text-label-md px-2.5 py-1 bg-surface-container-low text-primary rounded-full hover:bg-primary-fixed-dim/20 transition-colors">watch(count, ...)</button>
+<button class="text-label-md px-2.5 py-1 bg-surface-container-low text-primary rounded-full hover:bg-primary-fixed-dim/20 transition-colors">reactive object update</button>
+<button class="text-label-md px-2.5 py-1 bg-surface-container-low text-primary rounded-full hover:bg-primary-fixed-dim/20 transition-colors">computed ref trigger</button>
+</div>
+</div>
+</div>
+<!-- Call Chain Diagram -->
+<div class="w-full max-w-2xl flex flex-col items-center gap-0 relative">
+<!-- Entry Point Node -->
+<div class="z-10 bg-white border-2 border-primary p-4 rounded-xl w-64 text-center flow-node-glow transition-transform hover:scale-105 cursor-pointer">
+<span class="text-[10px] uppercase font-bold text-primary tracking-widest block mb-1">Trigger Point</span>
+<code class="text-body-md font-mono font-bold text-on-surface">count.value++</code>
+</div>
+<!-- Flow Line 1 -->
+<div class="h-12 w-0.5 call-chain-line"></div>
+<!-- Node 2 -->
+<div class="z-10 bg-white border border-border-subtle p-4 rounded-xl w-72 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-indigo-50 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-bold text-on-surface">triggerRefValue</p>
+<p class="text-[11px] text-on-surface-variant font-mono truncate">reactivity/ref.ts:128</p>
+</div>
+</div>
+<!-- Flow Line 2 -->
+<div class="h-12 w-0.5 call-chain-line"></div>
+<!-- Node 3 -->
+<div class="z-10 bg-white border border-border-subtle p-4 rounded-xl w-72 flex items-center gap-4 hover:shadow-md transition-shadow cursor-pointer group">
+<div class="w-10 h-10 rounded-full bg-indigo-50 text-primary flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-white transition-colors">
+<span class="material-symbols-outlined text-[20px]">dynamic_feed</span>
+</div>
+<div class="flex-1 min-w-0">
+<p class="text-label-md font-bold text-on-surface">triggerEffects</p>
+<p class="text-[11px] text-on-surface-variant font-mono truncate">reactivity/effect.ts:342</p>
+</div>
+</div>
+<!-- Flow Line 3 (Branching feel) -->
+<div class="relative h-16 w-full flex justify-center">
+<div class="absolute top-0 bottom-0 w-0.5 call-chain-line"></div>
+<!-- Horizontal path for branch -->
+<div class="absolute bottom-0 w-48 border-b-2 border-dashed border-primary/30"></div>
+<div class="absolute bottom-0 left-[calc(50%-96px)] w-0.5 h-4 call-chain-line"></div>
+<div class="absolute bottom-0 right-[calc(50%-96px)] w-0.5 h-4 call-chain-line"></div>
+</div>
+<!-- Branch Row -->
+<div class="flex gap-8 mt-0">
+<!-- Node 4a -->
+<div class="z-10 bg-white border border-border-subtle p-4 rounded-xl w-60 flex flex-col gap-2 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-api-teal">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold text-api-teal uppercase">Async Task</span>
+<span class="material-symbols-outlined text-api-teal text-[18px]">schedule</span>
+</div>
+<p class="text-label-md font-bold text-on-surface">scheduler</p>
+<p class="text-[11px] text-on-surface-variant font-mono">runtime-core/scheduler.ts</p>
+</div>
+<!-- Node 4b -->
+<div class="z-10 bg-white border border-border-subtle p-4 rounded-xl w-60 flex flex-col gap-2 hover:shadow-md transition-shadow cursor-pointer border-l-4 border-l-source-purple">
+<div class="flex items-center justify-between">
+<span class="text-[10px] font-bold text-source-purple uppercase">Callback</span>
+<span class="material-symbols-outlined text-source-purple text-[18px]">visibility</span>
+</div>
+<p class="text-label-md font-bold text-on-surface">watch callback</p>
+<p class="text-[11px] text-on-surface-variant font-mono">App.vue:42</p>
+</div>
+</div>
+<!-- Final Line -->
+<div class="h-12 w-0.5 call-chain-line"></div>
+<!-- Terminal Node -->
+<div class="z-10 bg-surface-container-highest border border-border-subtle px-6 py-3 rounded-full flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-on-surface-variant text-[18px]">done_all</span>
+<span class="text-label-md font-bold text-on-surface">DOM Mutation (Patch)</span>
+</div>
+</div>
+<!-- Background Subtle Visual -->
+<div class="mt-12 text-center opacity-40">
+<p class="text-label-md text-on-surface-variant max-w-sm italic">
+                        Visualization of the reactive path for a simple ref increment. 
+                        Note the transition from sync reactivity to async scheduler.
+                    </p>
+</div>
+</div>
+<!-- Right Sidebar Details -->
+<aside class="w-80 bg-white border-l border-border-subtle overflow-y-auto">
+<div class="p-6">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-sm text-[18px]">链路详情</h3>
+<button class="text-primary hover:bg-primary-fixed-dim/10 p-1.5 rounded transition-colors">
+<span class="material-symbols-outlined text-[20px]">share</span>
+</button>
+</div>
+<!-- Analysis Section 1 -->
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span class="text-label-md font-bold text-on-surface uppercase tracking-tight">Active Node</span>
+</div>
+<div class="bg-surface-gray rounded-lg p-4 border border-border-subtle">
+<p class="text-body-md font-bold text-primary mb-1">count.value++</p>
+<p class="text-[12px] text-on-surface-variant mb-3 leading-relaxed">
+                                触发了 RefImpl 类的 setter 方法，开启了整个响应式更新链路。
+                            </p>
+<div class="flex items-center gap-2 text-[11px] font-mono text-on-surface-variant bg-white p-2 rounded border border-border-subtle/50">
+<span class="material-symbols-outlined text-[14px]">link</span>
+                                ref.ts:227
+                            </div>
+</div>
+</div>
+<!-- Stats -->
+<div class="mb-8">
+<div class="flex items-center gap-2 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+<span class="text-label-md font-bold text-on-surface uppercase tracking-tight">影响范围</span>
+</div>
+<div class="grid grid-cols-1 gap-3">
+<div class="flex items-center justify-between bg-surface-container-low px-4 py-3 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-api-teal text-[18px]">layers</span>
+<span class="text-body-md">更新组件</span>
+</div>
+<span class="font-bold text-primary">1个</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low px-4 py-3 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-source-purple text-[18px]">animation</span>
+<span class="text-body-md">触发 Effects</span>
+</div>
+<span class="font-bold text-primary">2个</span>
+</div>
+<div class="flex items-center justify-between bg-surface-container-low px-4 py-3 rounded-lg">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-tertiary text-[18px]">notifications_active</span>
+<span class="text-body-md">Watch 监听</span>
+</div>
+<span class="font-bold text-primary">1个</span>
+</div>
+</div>
+</div>
+<!-- AI Insights -->
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
+<span class="text-label-md font-bold text-on-surface uppercase tracking-tight">性能提示</span>
+</div>
+<div class="bg-tertiary/5 border border-tertiary/10 rounded-xl p-4">
+<div class="flex items-center gap-2 text-tertiary mb-2">
+<span class="material-symbols-outlined text-[20px]">lightbulb</span>
+<span class="text-label-md font-bold">Optimization Advice</span>
+</div>
+<p class="text-[13px] text-tertiary leading-relaxed">
+                                该更新链路触发频繁（Detected 60fps spike）。建议检查是否可以使用 <code class="bg-white/50 px-1 rounded">shallowRef</code> 替代，或者在连续修改多个值时使用 <code class="bg-white/50 px-1 rounded">batch</code> 以避免重复触发 Scheduler。
+                            </p>
+<button class="mt-4 w-full py-2 text-label-md font-bold text-tertiary border border-tertiary/20 rounded-lg hover:bg-tertiary/10 transition-colors">查看优化方案</button>
+</div>
+</div>
+</div>
+</aside>
+</div>
+</main>
+<!-- Floating Tooltip (Dynamic Context) -->
+<div class="fixed hidden bg-inverse-surface text-inverse-on-surface p-3 rounded-lg text-[12px] shadow-xl z-[100] max-w-[200px] pointer-events-none" id="chain-tooltip">
+<div class="font-bold mb-1 border-b border-white/20 pb-1">Execution Logic</div>
+<p class="opacity-80">Sets the dirty flag on effect and pushes it to the async flush queue.</p>
+</div>
+<script>
+        // Micro-interaction for diagram nodes
+        document.querySelectorAll('.z-10').forEach(node => {
+            node.addEventListener('mouseenter', (e) => {
+                const tooltip = document.getElementById('chain-tooltip');
+                const rect = node.getBoundingClientRect();
+                
+                tooltip.style.left = (rect.right + 10) + 'px';
+                tooltip.style.top = rect.top + 'px';
+                tooltip.classList.remove('hidden');
+            });
+            node.addEventListener('mouseleave', () => {
+                document.getElementById('chain-tooltip').classList.add('hidden');
+            });
+        });
+
+        // Simple animation for the path lines on load
+        window.addEventListener('load', () => {
+            const lines = document.querySelectorAll('.call-chain-line');
+            lines.forEach((line, i) => {
+                line.style.opacity = '0';
+                line.style.transform = 'scaleY(0)';
+                line.style.transformOrigin = 'top';
+                line.style.transition = `all 0.4s ease ${i * 0.15}s`;
+                
+                setTimeout(() => {
+                    line.style.opacity = '1';
+                    line.style.transform = 'scaleY(1)';
+                }, 100);
+            });
+        });
+    </script>
+</body></html>
